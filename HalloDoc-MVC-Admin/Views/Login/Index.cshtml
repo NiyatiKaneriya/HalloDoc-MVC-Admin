@@ -1,0 +1,60 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<section  class="login-body">
+   
+        <div class="min-vh-100 d-flex justify-content-center align-items-center  ">
+            <div class="card bg-transparent d-flex justify-content-center align-items-center " id="card">
+                <div class="row ">
+                    <div class="col-md-6 col-lg-6 d-flex justify-content-center">
+                        <img src="~/images/11116016_415.jpg" class="img-fluid" id="hero-img" />
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-lg-6 d-flex align-items-center">
+                        <div class="card-body  p-lg-5 text-black">
+                            <form asp-controller="Dashboard" asp-action="Index" id="lgin-form">
+                                <div class="d-flex align-items-center justify-content-center mb-3 pb-1">
+                                    <span class=" mb-0">
+                                        <img src="~/images/logo-PhotoRoom.png-PhotoRoom.png"
+                                             class="img-fluid" id="logo">
+                                    </span>
+                                </div>
+
+                                <h3 class="mb-3 pb-3 text-center">
+                                    Login To Your Account
+                                </h3>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="floatingInput"
+                                           placeholder="Username">
+                                    <label for="floatingInput" class="text-muted">Username</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="password" class="form-control" id="floatingPassword"
+                                           placeholder="Password">
+                                    <label for="floatingPassword" class="text-muted">Password</label>
+                                </div>
+                                <div class="pt-1 my-4">
+                                    <button class="btn btn-info btn-lg btn-block text-white card-text w-100"
+                                            type="submit">
+                                        Login
+                                    </button>
+                                </div>
+                                <div class="d-flex justify-content-center mb-4">
+                                    <a class="small text-info text-decoration-none" asp-controller="Login" asp-action="ForgotPassword">
+                                        Forgot
+                                        password?
+                                    </a>
+                                </div>
+                                <div class="d-flex justify-content-around">
+                                    <a href="#" class="small text-muted">Terms of condition</a>
+                                    <a href="#" class="small text-muted">Privacy policy</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+</section>
