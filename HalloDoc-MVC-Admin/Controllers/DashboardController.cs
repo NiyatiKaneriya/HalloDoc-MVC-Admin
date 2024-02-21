@@ -25,9 +25,14 @@ namespace HalloDoc_MVC_Admin.Controllers
             ViewBag.UnpaidCount = await _requestRepository.UnpaidCount();
 
 
-            List<ViewDashboradList> requestTableData =  await _requestRepository.RequestTableAsync(1);
-            return View(requestTableData);
+            return View();
         }
-       
+        public async Task<IActionResult> GetRequestTable(int state)
+        {
+            List<ViewDashboradList> requestTableData = await _requestRepository.RequestTableAsync(state);
+        
+            return PartialView("_DashboardTable",requestTableData);
+        }
+
     }
 }

@@ -133,7 +133,9 @@
             </div>
         </div>
     </div>
-    <partial name="_DashboardTable" />
+    <div id="data-table">
+        
+    </div>
 
 </section>
 @section scripts{
@@ -143,8 +145,9 @@
         $(document).ready(function () {
             $(".btn-state").click(function () {
                 var state = $(this).data("state");
+                console.log(state);
                 $.ajax({
-                    url: '/Dashboard/',
+                    url: '/Dashboard/GetRequestTable',
                     type: 'GET',
                     data: { state: state },
                     success: function (data) {

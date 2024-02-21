@@ -67,7 +67,7 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
                             PatientL = rc.LastName,
                             Email = rc.Email,
                             Status = r.Status,
-                           // DOB = new DateTime((int)rc.IntYear, int.Parse(rc.StrMonth), (int)rc.IntDate),
+                            DOB = new DateTime((int)rc.IntYear, int.Parse(rc.StrMonth), (int)rc.IntDate),
                             RequestTypeId = r.RequestTypeId,
                             RequestorF = r.FirstName,
                             RequestorL = r.LastName,
