@@ -1,8 +1,14 @@
+using HalloDoc_MVC_AdminRepositories.Repository.Interface;
+using HalloDoc_MVC_AdminRepositories.Repository;
+using HalloDoc_MVC_AdminDBEntity.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddDbContext<ApplicationDbContext>();
+builder.Services.AddScoped<IContactRepository, ConctactRepository>();
+builder.Services.AddScoped<IRequestRepository, RequestRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -13,7 +19,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();

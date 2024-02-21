@@ -1,24 +1,37 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    overflow-x:hidden;
+}
+.theme-button .back-btn {
+    position: absolute;
+    right: 40px;
+}
+
+.theme-button:hover {
+    color: white;
+}
+
+.back-btn:hover {
+    color: white;
 }
 
 
@@ -38,24 +51,139 @@ body {
     #hero-img {
         display: none;
     }
-
-    /*body {
-        background-image: url("../images/11116016_415-removebg-preview.png");
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-    }*/
-    /* Glassmorphism card effect */
-    /*#card {
-        backdrop-filter: blur(8px) saturate(180%);
-        -webkit-backdrop-filter: blur(8px) saturate(180%);
-        background-color: rgba(255, 255, 255, 0.75);
-        border-radius: 12px;
-        border: 1px solid rgba(209, 213, 219, 0.3);
-        height: 100%;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
-*/
 }
+
+.btn-state {
+    padding: 0 !important;
+}
+.AdminStatediv{
+    position:relative;
+}
+
+#new {
+    border: solid thin #063982;
+    color: #063982;
+    background-color: #CFE2FF;
+}
+
+    #new:hover {
+        background-color: #063982;
+        color: white;
+    }
+        #new:hover::after {
+            position: absolute;
+            content: '';
+            left: 42%;
+            border-style: solid;
+            border-width: 0px 25px 25px 25px;
+            transform: rotate(180deg);
+            border-color: transparent transparent #063982 transparent;
+            transition: 1s;
+        }
+
+#pending {
+    border: solid thin #0AA2C0;
+    color: #0AA2C0;
+    background-color: #D1F7FF;
+    
+}
+
+    #pending:hover {
+        background-color: #0AA2C0;
+        color: white;
+    }
+        #pending:hover::after {
+            position: absolute;
+            content: '';
+            left: 42%;
+            border-style: solid;
+            border-width: 0px 25px 25px 25px;
+            transform: rotate(180deg);
+            border-color: transparent transparent #0AA2C0 transparent;
+            transition: 1s;
+        }
+
+#active {
+    border: solid thin #198754;
+    color: #198754;
+    background-color: #E0F7ED;
+}
+
+    #active:hover {
+        background-color: #198754;
+        color: white;
+    }
+
+        #active:hover::after {
+            position: absolute;
+            content: '';
+            left: 42%;
+            border-style: solid;
+            border-width: 0px 25px 25px 25px;
+            transform: rotate(180deg);
+            border-color: transparent transparent #198754 transparent;
+            transition: 1s;
+        }
+
+#conclude {
+    border: solid thin #AB296A;
+    color: #AB296A;
+    background-color: #FFDDED;
+}
+
+    #conclude:hover {
+        background-color: #AB296A;
+        color: white;
+    }
+        #conclude:hover::after {
+            position: absolute;
+            content: '';
+            left: 42%;
+            border-style: solid;
+            border-width: 0px 25px 25px 25px;
+            transform: rotate(180deg);
+            border-color: transparent transparent #AB296A transparent;
+            transition: 1s;
+        }
+
+#toclose {
+    border: solid thin #0A58CA;
+    color: #0A58CA;
+    background-color: #CFE2FF;
+}
+
+    #toclose:hover {
+        background-color: #0A58CA;
+        color: white;
+    }
+        #toclose:hover::after {
+            position: absolute;
+            content: '';
+            left: 42%;
+            border-style: solid;
+            border-width: 0px 25px 25px 25px;
+            transform: rotate(180deg);
+            border-color: transparent transparent #0A58CA transparent;
+            transition: 1s;
+        }
+
+#unpaid {
+    border: solid thin #8C68CD;
+    color: #8C68CD;
+    background-color: #E2D9F3;
+}
+
+    #unpaid:hover {
+        background-color: #8C68CD;
+        color: white;
+    }
+        #unpaid:hover::after {
+            position: absolute;
+            content: '';
+            left: 42%;
+            border-style: solid;
+            border-width: 0px 25px 25px 25px;
+            transform: rotate(180deg);
+            border-color: transparent transparent #8C68CD transparent;
+            transition: 1s;
+        }

@@ -1,0 +1,69 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<HalloDoc_MVC_AdminDBEntity.ViewModels.ViewDashboradList>
+
+
+<div class="m-3">
+        <div class="w-100 overflow-scroll">
+            <table class="w-100">
+                <thead>
+                    <tr class="border-bottom">
+                        <th>Name</th>
+                        <th></th>
+                        <th>Date of Birth</th>
+                        <th>Requestor</th>
+                        <th>Requested Date</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Notes</th>
+                        <th>chat With</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr class=" border-bottom p-2">
+                            <td>@item.Patient</td>
+                            <td><i class="fa fa-regular fa-envelope"></i></td>
+                            <td>@item.DOB</td>
+                            <td>@item.Requestor</td>
+                            <td>@item.RequestedDate</td>
+                            <td><button type="button" class="btn btn-outline-secondary"><i class="fa fa-regular fa-phone"></i>@item.Phone</button></td>
+                            <td>@item.Address</td>
+                            <td>@item.Notes</td>
+                            <td>
+                                <button type="button" class="btn btn-outline-primary">@item.Physician</button>
+                            </td>
+                            <td>
+                                <div class="dropdown bg-transparent">
+                                    <button class="btn btn-secondary dropdown-toggle bg-white text-muted" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a class="dropdown-item" href="#">View Notes</a></li>
+                                        <li><a class="dropdown-item" href="#">Cancel case</a></li>
+                                        <li><a class="dropdown-item" href="#">Block</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+</div>
+
+
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+        
+    </script>
+}

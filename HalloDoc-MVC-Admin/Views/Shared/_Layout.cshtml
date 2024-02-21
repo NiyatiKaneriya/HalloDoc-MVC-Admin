@@ -6,46 +6,50 @@
     <title>@ViewData["Title"] - HalloDoc_MVC_Admin</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/HalloDoc_MVC_Admin.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/HalloDoc_Patient.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@19.2.16/build/css/intlTelInput.css">
 </head>
-<body>
+<body class="d-flex flex-column justify-content-between position-relative w-100">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HalloDoc_MVC_Admin</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow ">
+            <div class="container-fluid d-flex justify-content-between px-5">
+                <a class="navbar-brand" > <img src="~/images/logo-PhotoRoom.png-PhotoRoom.png" width="100" /> </a>
+                <div class="d-flex">
+                    <div>   Welcome <span class="fw-bolder"> @* @CV.UserName() *@ </span>     </div>
+                    <a asp-action="Logout" asp-controller="Login" class="btn btn-outline-info mx-2 " id="logout-btn">Logout</a>
+                    <button type="button" class="btn btn-outline-info mr-5 pr-5 " >
+                        <i class="fa fa-moon-o " aria-hidden="true"></i>
+                    </button>
                 </div>
+
             </div>
         </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+        @{
 
-    <footer class="border-top footer text-muted">
+            if (1==1)
+            {
+                <partial name="_PartialSubNav" />
+            }
+        }
+    </header>
+    <main role="main" class="w-100">
+        @RenderBody()
+    </main>
+
+    <footer class="border-top  text-muted mt-4">
         <div class="container">
-            &copy; 2024 - HalloDoc_MVC_Admin - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="d-flex justify-content-around p-2">
+                <a href="#" class="text-decoration-none text-muted">Terms of condition</a>
+                <a href="#" class="text-muted text-decoration-none">Privacy policy</a>
+            </div>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("DashboardScripts", required: false)
 </body>
 </html>

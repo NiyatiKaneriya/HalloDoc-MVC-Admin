@@ -3,4 +3,161 @@
 *@
 @{
 }
-<div>Admin Dashboard</div>
+
+<section class="p-5 container-fluid w-100">
+    <form class="row">
+        
+        <div class="AdminStatediv col-xl-2 col-lg-3 col-sm-4 col-6 my-1">
+            <button id="new" class="btn p-2 w-100 btn-state" data-state="1">
+                <h6 class="fw-semibold m-0 my-2">NEW</h6>
+                <h3 class="fw-bold">@ViewBag.NewCount</h3>
+            </button>
+        </div>
+        <div class="AdminStatediv col-xl-2 col-lg-3 col-sm-4 col-6 my-1">
+            <button id="pending" class="btn p-2 w-100 btn-state" data-state="3">
+                <h6 class="fw-semibold m-0 my-2"><i class="fa-solid fa-user-doctor"></i> PENDING</h6>
+                <h3 class="fw-bold">@ViewBag.PendingCount</h3>
+            </button>
+        </div>
+        <div class="AdminStatediv col-xl-2 col-lg-3 col-sm-4 col-6 my-1">
+            <button id="active" class="btn p-2 w-100 btn-state" data-state="2">
+                <h6 class="fw-semibold my-2">ACTIVE</h6>
+                <h3 class="fw-bold">@ViewBag.ActiveCount</h3>
+            </button>
+        </div>
+        <div class="AdminStatediv col-xl-2 col-lg-3 col-sm-4 col-6 my-1">
+            <button id="conclude" class="btn p-2 w-100 btn-state" data-state="4">
+                <h6 class="fw-semibold my-2">CONCLUDE</h6>
+                <h3 class="fw-bold">@ViewBag.ConcludeCount</h3>
+            </button>
+        </div>
+        <div class="AdminStatediv col-xl-2 col-lg-3 col-sm-4 col-6 my-1">
+            <button id="toclose" class="btn p-2 w-100 btn-state" data-state="5">
+                <h6 class="fw-semibold my-2">TO CLOSE</h6>
+                <h3 class="fw-bold">@ViewBag.ToCloseCount</h3>
+            </button>
+        </div>
+        <div class="AdminStatediv col-xl-2 col-lg-3 col-sm-4 col-6 my-1">
+            <button id="unpaid" class="btn p-2 w-100 btn-state" data-state="6">
+                <h6 class="fw-semibold my-2">UNPAID</h6>
+                <h3 class="fw-bold">@ViewBag.UnpaidCount</h3>
+            </button>
+        </div>
+    </form>
+    <div class="mt-4 d-flex flex-row justify-content-between">
+
+        <div>
+            <h4>Patients  </h4>
+        </div>
+        <div>
+            <div class="btn btn-info text-white" >
+                <i class="bi bi-send"></i>
+                <span class="top-btn p-2">
+                    send link
+                </span>
+            </div>
+            <div class="btn btn-info text-white">
+                <i class="bi bi-file-earmark-break"></i>
+                <span class="top-btn p-2">
+                    Create Request
+                </span>
+
+            </div>
+            <div class="btn btn-info text-white">
+                <i class="bi bi-forward"></i>
+                <span class="top-btn p-2">
+                    export
+                </span>
+
+            </div>
+            <div class="btn btn-info text-white">
+                <i class="bi bi-forward-fill"></i>
+                <span class="top-btn p-2">
+                    export all
+                </span>
+
+            </div>
+            <div class="btn btn-info text-white">
+                <i class="bi bi-person-square"></i>
+                <span class="top-btn p-2">
+                    Request DTY Support
+                </span>
+
+            </div>
+        </div>
+    </div>
+    <div class="row ps-2 mb-lg-0 ">
+        <div class="row col-xl-6">
+            <div class="col-sm-6">
+                <input id="patientsearch" class="form-control p-2 mt-3 px-4 mb-3 w-100" type="text"
+                       placeholder='Search Patients'>
+            </div>
+            <div class="col-sm-6">
+                <div class="">
+                    <select class="p-2 mt-3 px-4 form-control mb-3 w-100 " id="regionsearch">
+                        <option>All Region</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xl-6 d-flex justify-content-xl-end justify-content-center gap-2 gap-sm-3 gap-xl-4 p-0">
+            <div class="d-none d-xxl-flex align-items-center justify-content-center">
+                <a class="btn border border-secondary"> All </a>
+            </div>
+            <div class="d-flex align-items-center justify-content-center flex-column flex-lg-row">
+                <div class="border border-1 rounded-circle m-1"
+                     style="width: 15px; height:15px; background-color: #60bc60;"></div><span>Patient</span>
+            </div>
+            <div class="d-flex align-items-center justify-content-center flex-column flex-lg-row">
+                <div class="border border-1 rounded-circle m-1"
+                     style="width: 15px; height:15px; background-color: #ee9125;"></div>
+                <span>Family/Friend</span>
+            </div>
+            <div class="d-flex align-items-center justify-content-center flex-column flex-lg-row">
+                <div class="border border-1 rounded-circle m-1"
+                     style="width: 15px; height:15px; background-color: #e36478;"></div><span>Business</span>
+            </div>
+            <div class="d-flex align-items-center justify-content-center flex-column flex-lg-row">
+                <div class="border border-1 rounded-circle m-1"
+                     style="width: 15px; height:15px; background-color: #007fc7;"></div><span>Concierge</span>
+            </div>
+            <div class="d-flex align-items-center justify-content-center flex-column flex-lg-row">
+                <div class="border border-1 rounded-circle m-1"
+                     style="width: 15px; height:15px; background-color: #943db8;"></div><span>VIP</span>
+            </div>
+        </div>
+    </div>
+    <partial name="_DashboardTable" />
+
+</section>
+@section scripts{
+    
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+    <script>
+        $(document).ready(function () {
+            $(".btn-state").click(function () {
+                var state = $(this).data("state");
+                $.ajax({
+                    url: '/Dashboard/',
+                    type: 'GET',
+                    data: { state: state },
+                    success: function (data) {
+                        $('#data-table').html(data);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error occurred: " + error);
+                    }
+                });
+            });
+        });
+    </script>
+
+    
+}
+
