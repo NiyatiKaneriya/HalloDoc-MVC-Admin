@@ -8,37 +8,37 @@
     
         <div class="AdminStatediv col-xl-2 col-lg-3 col-sm-4 col-6 my-1">
             <div id="new" class="btn p-2 w-100 btn-state active active-btn" data-state="1">
-                <h6 class="fw-semibold m-0 my-2">NEW</h6>
+            <h5 class="fw-semibold m-0 my-2"> <i class="fa-solid fa-circle-exclamation"></i> NEW</h5>
                 <h3 class="fw-bold">@ViewBag.NewCount</h3>
             </div>
         </div>
         <div class="AdminStatediv col-xl-2 col-lg-3 col-sm-4 col-6 my-1">
             <div id="pending" class="btn p-2 w-100 btn-state" data-state="3">
-                <h6 class="fw-semibold m-0 my-2"><i class="fa-solid fa-user-doctor"></i> PENDING</h6>
+                <h5 class="fw-semibold m-0 my-2"><i class="fa-solid fa-user-doctor"></i> PENDING</h5>
                 <h3 class="fw-bold">@ViewBag.PendingCount</h3>
             </div>
         </div>
         <div class="AdminStatediv col-xl-2 col-lg-3 col-sm-4 col-6 my-1">
             <div id="active" class="btn p-2 w-100 btn-state" data-state="2">
-                <h6 class="fw-semibold my-2">ACTIVE</h6>
+            <h5 class="fw-semibold my-2"> <i class="fa-regular fa-circle-check"></i> ACTIVE</h5>
                 <h3 class="fw-bold">@ViewBag.ActiveCount</h3>
             </div>
         </div>
         <div class="AdminStatediv col-xl-2 col-lg-3 col-sm-4 col-6 my-1">
             <div id="conclude" class="btn p-2 w-100 btn-state" data-state="4">
-                <h6 class="fw-semibold my-2">CONCLUDE</h6>
+            <h5 class="fw-semibold my-2"><i class="fa-regular fa-clock"></i> CONCLUDE</h5>
                 <h3 class="fw-bold">@ViewBag.ConcludeCount</h3>
             </div>
         </div>
         <div class="AdminStatediv col-xl-2 col-lg-3 col-sm-4 col-6 my-1">
             <div id="toclose" class="btn p-2 w-100 btn-state" data-state="5">
-                <h6 class="fw-semibold my-2">TO CLOSE</h6>
+            <h5 class="fw-semibold my-2"><i class="fa-regular fa-circle-xmark"></i> TO CLOSE</h5>
                 <h3 class="fw-bold">@ViewBag.ToCloseCount</h3>
             </div>
         </div>
         <div class="AdminStatediv col-xl-2 col-lg-3 col-sm-4 col-6 my-1">
             <div id="unpaid" class="btn p-2 w-100 btn-state" data-state="6">
-                <h6 class="fw-semibold my-2">UNPAID</h6>
+            <h5 class="fw-semibold my-2"><i class="fa-solid fa-money-check-dollar"></i> UNPAID</h5>
                 <h3 class="fw-bold">@ViewBag.UnpaidCount</h3>
             </div>
         </div>
@@ -50,34 +50,35 @@
         </div>
         <div>
             <div class="btn btn-info text-white" >
-                <i class="bi bi-send"></i>
+                <i class="fa-regular fa-share-from-square"></i>
                 <span class="top-btn p-2">
                     send link
                 </span>
             </div>
             <div class="btn btn-info text-white">
-                <i class="bi bi-file-earmark-break"></i>
+                <i class="fa-solid fa-file-pen"></i>
                 <span class="top-btn p-2">
                     Create Request
                 </span>
 
             </div>
             <div class="btn btn-info text-white">
-                <i class="bi bi-forward"></i>
+                <i class="fa-solid fa-arrows-turn-right"></i>
                 <span class="top-btn p-2">
                     export
                 </span>
 
             </div>
             <div class="btn btn-info text-white">
-                <i class="bi bi-forward-fill"></i>
+                <i class="fa-solid fa-file-export"></i>
+                
                 <span class="top-btn p-2">
                     export all
                 </span>
 
             </div>
             <div class="btn btn-info text-white">
-                <i class="bi bi-person-square"></i>
+                <i class="fa-solid fa-circle-question"></i>
                 <span class="top-btn p-2">
                     Request DTY Support
                 </span>
@@ -141,34 +142,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        // var state = "1";
-        // $.ajax({
-        //         url: '/Dashboard/GetRequestTable',
-        //         type: 'GET',
-        //         data: { state: 1 },
-        //         success: function (data) {
-        //             $('#data-table').html(data);
-        //         },
-        //         error: function (xhr, status, error) {
-        //             console.error("Error occurred: " + error);
-        //         }
-        //     });
-        // $(".btn-state").click(function () {
-        //     var state = $(this).data("state");
-        //     var requesttype = $(this).data("requesttype");
-        //     $.ajax({
-        //         url: '/Dashboard/GetRequestTable',
-        //         type: 'GET',
-        //         data: { state: state },
-        //         success: function (data) {
-        //             $('#data-table').html(data);
-        //         },
-        //         error: function (xhr, status, error) {
-        //             console.error("Error occurred: " + error);
-        //         }
-        //     });
-        // });
-        // <script>
+      
             var state = "1"; // Variable to store the selected state
             var requesttype = 0;
         $(document).ready(function () {

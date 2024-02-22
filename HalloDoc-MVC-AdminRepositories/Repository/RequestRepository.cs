@@ -53,6 +53,7 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
         }
         public async Task<List<ViewDashboradList>> RequestTableAsync(int state, int requesttype)
         {
+              //List<int> priceList = status.Split(',').Select(int.Parse).ToList();
             List<int> statusList = new List<int>();
             if (state == 5)
             {

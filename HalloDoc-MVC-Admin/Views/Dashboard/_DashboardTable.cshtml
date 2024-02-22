@@ -54,7 +54,7 @@
                     <tr class=" border-bottom p-2 bg-@item.RequestTypeId">
                         <td class="d-none">@item.RequestTypeId</td>
                             <td id="PatientName">@item.Patient</td>
-                            <td><i class="fa fa-regular fa-envelope"></i></td>
+                    <td><i class="fa-regular fa-envelope"></i></td>
                         @if (Model[0].Status == 1 || Model[0].Status == 2 || Model[0].Status == 3 || Model[0].Status == 4 || Model[0].Status == 5)
                         {
                             <td>@item.DOB</td>
@@ -77,7 +77,9 @@
                         }
                         @if (Model[0].Status == 1 || Model[0].Status == 2 || Model[0].Status == 3 || Model[0].Status == 4 || Model[0].Status == 6)
                         {
-                            <td><button type="button" class="btn btn-outline-light bg-transparent"><i class="fa fa-regular fa-phone"></i>@item.Phone</button></td>
+                        <td><button type="button" class="btn btn-outline-light bg-transparent"><i class="fa-solid fa-phone"></i> @item.Phone</button>
+
+                        </td>
                         }
                             <td>@item.Address</td>
                         @if (Model[0].Status == 1 || Model[0].Status == 2 || Model[0].Status == 3 || Model[0].Status == 5)
@@ -91,7 +93,7 @@
                             {
                                 <button type="button" class="btn btn-outline-light bg-transparent"><i class="fa fa-solid fa-user"></i> Petient</button>
                             }
-                            <button type="button" class="btn btn-outline-light bg-transparent"><i class="fa fa-regular fa-user"></i> Provider </button>
+                        <button type="button" class="btn btn-outline-light bg-transparent"><i class="fa-solid fa-user-nurse"></i> Provider </button>
                             </td>
                             <td>
                                 <div class="dropdown bg-transparent">
