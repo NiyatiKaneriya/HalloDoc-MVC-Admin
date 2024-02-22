@@ -15,6 +15,6 @@ namespace HalloDoc_MVC_AdminRepositories.Repository.Interface
         public Task<int> ConcludeCount();
         public  Task<int> ToCloseCount();
         public Task<int> UnpaidCount();
-        public  Task<List<ViewDashboradList>> RequestTableAsync(int state);
+        public  Task<List<ViewDashboradList>> RequestTableAsync(int state,int requesttype);
     }
 }

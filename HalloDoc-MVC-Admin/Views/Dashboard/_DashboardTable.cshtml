@@ -7,41 +7,95 @@
 @model List<HalloDoc_MVC_AdminDBEntity.ViewModels.ViewDashboradList>
 
 
-<div class="m-3" >
-        <div class="w-100 overflow-scroll">
-            <table class="w-100">
+       <div class="w-100 overflow-scroll">
+            <table class="table w-100">
                 <thead>
-                    <tr class="border-bottom">
+                    <tr class="border-bottom ">
+                        <th class="d-none">requesttypeid</th>
                         <th>Name</th>
                         <th></th>
+                    @if (Model[0].Status == 1 || Model[0].Status == 2 || Model[0].Status == 3 || Model[0].Status == 4 || Model[0].Status == 5)
+                    {
                         <th>Date of Birth</th>
+                    }
+                    @if (Model[0].Status == 1 || Model[0].Status == 2 || Model[0].Status == 3 )
+                    {
                         <th>Requestor</th>
+                    }
+                    @if (Model[0].Status == 1)
+                    {
                         <th>Requested Date</th>
+                    }
+                    @if (Model[0].Status == 2 || Model[0].Status == 3 || Model[0].Status == 4 || Model[0].Status == 5 || Model[0].Status == 6)
+                    {
+                        <th>Physician Name</th>
+                    }
+                    @if (Model[0].Status == 2 || Model[0].Status == 3 || Model[0].Status == 4 || Model[0].Status == 5 || Model[0].Status == 6)
+                    {
+                        <th>Date Of Service</th>
+                    }
+
+                    @if (Model[0].Status == 1 || Model[0].Status == 2 || Model[0].Status == 3 || Model[0].Status == 4 || Model[0].Status == 6)
+                    {
                         <th>Phone</th>
+                    }                      
                         <th>Address</th>
+                    @if (Model[0].Status == 1 || Model[0].Status == 2 || Model[0].Status == 3 || Model[0].Status == 5 )
+                    {
                         <th>Notes</th>
+                    }
                         <th>chat With</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="text-light">
                     @foreach (var item in Model)
                     {
-                    <tr class=" border-bottom p-2">
-                            <td>@item.Patient</td>
+                    <tr class=" border-bottom p-2 bg-@item.RequestTypeId">
+                        <td class="d-none">@item.RequestTypeId</td>
+                            <td id="PatientName">@item.Patient</td>
                             <td><i class="fa fa-regular fa-envelope"></i></td>
+                        @if (Model[0].Status == 1 || Model[0].Status == 2 || Model[0].Status == 3 || Model[0].Status == 4 || Model[0].Status == 5)
+                        {
                             <td>@item.DOB</td>
+                        }
+                        @if (Model[0].Status == 1 || Model[0].Status == 2 || Model[0].Status == 3)
+                        {
                             <td>@item.Requestor</td>
+                        }
+                        @if (Model[0].Status == 1)
+                        {
                             <td>@item.RequestedDate</td>
-                            <td><button type="button" class="btn btn-outline-secondary"><i class="fa fa-regular fa-phone"></i>@item.Phone</button></td>
+                        }
+                        @if (Model[0].Status == 2 || Model[0].Status == 3 || Model[0].Status == 4 || Model[0].Status == 5 || Model[0].Status == 6)
+                        {
+                            <td>@item.Physician</td>
+                        }
+                        @if (Model[0].Status == 2 || Model[0].Status == 3 || Model[0].Status == 4 || Model[0].Status == 5 || Model[0].Status == 6)
+                        {
+                            <td>20-2-25</td>
+                        }
+                        @if (Model[0].Status == 1 || Model[0].Status == 2 || Model[0].Status == 3 || Model[0].Status == 4 || Model[0].Status == 6)
+                        {
+                            <td><button type="button" class="btn btn-outline-light bg-transparent"><i class="fa fa-regular fa-phone"></i>@item.Phone</button></td>
+                        }
                             <td>@item.Address</td>
+                        @if (Model[0].Status == 1 || Model[0].Status == 2 || Model[0].Status == 3 || Model[0].Status == 5)
+                        {
                             <td>@item.Notes</td>
+                        }
+                            
                             <td>
-                                <button type="button" class="btn btn-outline-primary">@item.Physician</button>
+                                
+                            @if (Model[0].Status == 2 || Model[0].Status == 3 || Model[0].Status == 4 || Model[0].Status == 5 || Model[0].Status == 6)
+                            {
+                                <button type="button" class="btn btn-outline-light bg-transparent"><i class="fa fa-solid fa-user"></i> Petient</button>
+                            }
+                            <button type="button" class="btn btn-outline-light bg-transparent"><i class="fa fa-regular fa-user"></i> Provider </button>
                             </td>
                             <td>
                                 <div class="dropdown bg-transparent">
-                                    <button class="btn btn-secondary dropdown-toggle bg-white text-muted" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="btn btn-outline-light bg-transparent dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                         Actions
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -56,11 +110,6 @@
                 </tbody>
             </table>
         </div>
-</div>
-
-
-
-
 
 @section Scripts{
     <script type="text/javascript">

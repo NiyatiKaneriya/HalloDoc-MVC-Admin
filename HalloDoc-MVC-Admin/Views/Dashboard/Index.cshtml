@@ -4,46 +4,45 @@
 @{
 }
 
-<section class="p-5 container-fluid w-100">
-    <form class="row">
-        
+<section class="p-5 container-fluid w-100 row">
+    
         <div class="AdminStatediv col-xl-2 col-lg-3 col-sm-4 col-6 my-1">
-            <button id="new" class="btn p-2 w-100 btn-state" data-state="1">
+            <div id="new" class="btn p-2 w-100 btn-state active active-btn" data-state="1">
                 <h6 class="fw-semibold m-0 my-2">NEW</h6>
                 <h3 class="fw-bold">@ViewBag.NewCount</h3>
-            </button>
+            </div>
         </div>
         <div class="AdminStatediv col-xl-2 col-lg-3 col-sm-4 col-6 my-1">
-            <button id="pending" class="btn p-2 w-100 btn-state" data-state="3">
+            <div id="pending" class="btn p-2 w-100 btn-state" data-state="3">
                 <h6 class="fw-semibold m-0 my-2"><i class="fa-solid fa-user-doctor"></i> PENDING</h6>
                 <h3 class="fw-bold">@ViewBag.PendingCount</h3>
-            </button>
+            </div>
         </div>
         <div class="AdminStatediv col-xl-2 col-lg-3 col-sm-4 col-6 my-1">
-            <button id="active" class="btn p-2 w-100 btn-state" data-state="2">
+            <div id="active" class="btn p-2 w-100 btn-state" data-state="2">
                 <h6 class="fw-semibold my-2">ACTIVE</h6>
                 <h3 class="fw-bold">@ViewBag.ActiveCount</h3>
-            </button>
+            </div>
         </div>
         <div class="AdminStatediv col-xl-2 col-lg-3 col-sm-4 col-6 my-1">
-            <button id="conclude" class="btn p-2 w-100 btn-state" data-state="4">
+            <div id="conclude" class="btn p-2 w-100 btn-state" data-state="4">
                 <h6 class="fw-semibold my-2">CONCLUDE</h6>
                 <h3 class="fw-bold">@ViewBag.ConcludeCount</h3>
-            </button>
+            </div>
         </div>
         <div class="AdminStatediv col-xl-2 col-lg-3 col-sm-4 col-6 my-1">
-            <button id="toclose" class="btn p-2 w-100 btn-state" data-state="5">
+            <div id="toclose" class="btn p-2 w-100 btn-state" data-state="5">
                 <h6 class="fw-semibold my-2">TO CLOSE</h6>
                 <h3 class="fw-bold">@ViewBag.ToCloseCount</h3>
-            </button>
+            </div>
         </div>
         <div class="AdminStatediv col-xl-2 col-lg-3 col-sm-4 col-6 my-1">
-            <button id="unpaid" class="btn p-2 w-100 btn-state" data-state="6">
+            <div id="unpaid" class="btn p-2 w-100 btn-state" data-state="6">
                 <h6 class="fw-semibold my-2">UNPAID</h6>
                 <h3 class="fw-bold">@ViewBag.UnpaidCount</h3>
-            </button>
+            </div>
         </div>
-    </form>
+    
     <div class="mt-4 d-flex flex-row justify-content-between">
 
         <div>
@@ -89,7 +88,7 @@
     <div class="row ps-2 mb-lg-0 ">
         <div class="row col-xl-6">
             <div class="col-sm-6">
-                <input id="patientsearch" class="form-control p-2 mt-3 px-4 mb-3 w-100" type="text"
+                <input id="search-input" class="form-control p-2 mt-3 px-4 mb-3 w-100" type="text"
                        placeholder='Search Patients'>
             </div>
             <div class="col-sm-6">
@@ -107,27 +106,27 @@
 
 
         <div class="col-xl-6 d-flex justify-content-xl-end justify-content-center gap-2 gap-sm-3 gap-xl-4 p-0">
-            <div class="d-none d-xxl-flex align-items-center justify-content-center">
-                <a class="btn border border-secondary"> All </a>
+            <div class="btn btn-transparent d-flex align-items-center justify-content-center flex-column flex-lg-row request-type-btn" data-requesttype="0">
+                <span> All </span>
             </div>
-            <div class="d-flex align-items-center justify-content-center flex-column flex-lg-row">
+            <div class="btn btn-transparent d-flex align-items-center justify-content-center flex-column flex-lg-row request-type-btn" data-requesttype="1">
                 <div class="border border-1 rounded-circle m-1"
                      style="width: 15px; height:15px; background-color: #60bc60;"></div><span>Patient</span>
             </div>
-            <div class="d-flex align-items-center justify-content-center flex-column flex-lg-row">
+            <div class="btn btn-transparent d-flex align-items-center justify-content-center flex-column flex-lg-row request-type-btn" data-requesttype="2">
                 <div class="border border-1 rounded-circle m-1"
                      style="width: 15px; height:15px; background-color: #ee9125;"></div>
                 <span>Family/Friend</span>
             </div>
-            <div class="d-flex align-items-center justify-content-center flex-column flex-lg-row">
+            <div class="btn btn-transparent d-flex align-items-center justify-content-center flex-column flex-lg-row request-type-btn" data-requesttype="4">
                 <div class="border border-1 rounded-circle m-1"
                      style="width: 15px; height:15px; background-color: #e36478;"></div><span>Business</span>
             </div>
-            <div class="d-flex align-items-center justify-content-center flex-column flex-lg-row">
+            <div class="btn btn-transparent d-flex align-items-center justify-content-center flex-column flex-lg-row request-type-btn" data-requesttype="3">
                 <div class="border border-1 rounded-circle m-1"
                      style="width: 15px; height:15px; background-color: #007fc7;"></div><span>Concierge</span>
             </div>
-            <div class="d-flex align-items-center justify-content-center flex-column flex-lg-row">
+            <div class="btn btn-transparent d-flex align-items-center justify-content-center flex-column flex-lg-row request-type-btn" data-requesttype="5">
                 <div class="border border-1 rounded-circle m-1"
                      style="width: 15px; height:15px; background-color: #943db8;"></div><span>VIP</span>
             </div>
@@ -139,28 +138,111 @@
 
 </section>
 @section scripts{
-    
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+        // var state = "1";
+        // $.ajax({
+        //         url: '/Dashboard/GetRequestTable',
+        //         type: 'GET',
+        //         data: { state: 1 },
+        //         success: function (data) {
+        //             $('#data-table').html(data);
+        //         },
+        //         error: function (xhr, status, error) {
+        //             console.error("Error occurred: " + error);
+        //         }
+        //     });
+        // $(".btn-state").click(function () {
+        //     var state = $(this).data("state");
+        //     var requesttype = $(this).data("requesttype");
+        //     $.ajax({
+        //         url: '/Dashboard/GetRequestTable',
+        //         type: 'GET',
+        //         data: { state: state },
+        //         success: function (data) {
+        //             $('#data-table').html(data);
+        //         },
+        //         error: function (xhr, status, error) {
+        //             console.error("Error occurred: " + error);
+        //         }
+        //     });
+        // });
+        // <script>
+            var state = "1"; // Variable to store the selected state
+            var requesttype = 0;
         $(document).ready(function () {
+            // Event handler for state buttons
+            filterData(state, requesttype);
             $(".btn-state").click(function () {
-                var state = $(this).data("state");
-                console.log(state);
-                $.ajax({
-                    url: '/Dashboard/GetRequestTable',
-                    type: 'GET',
-                    data: { state: state },
-                    success: function (data) {
-                        $('#data-table').html(data);
-                    },
-                    error: function (xhr, status, error) {
-                        console.error("Error occurred: " + error);
-                    }
-                });
+                state = $(this).data("state");
+                filterData(state, requesttype);
+            });
+
+            // Event handler for request type buttons
+            $(".request-type-btn").click(function () {
+                var requesttype = $(this).data("requesttype");
+                filterData(state, requesttype);
             });
         });
+
+        function filterData(state, requesttype) {
+            $.ajax({
+                url: '/Dashboard/GetRequestTable',
+                type: 'GET',
+                data: { state: state, requesttype: requesttype },
+                success: function (data) {
+                    $('#data-table').html(data);
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error occurred: " + error);
+                }
+            });
+        }
     </script>
 
     
+    <script>
+        $(document).ready(function () {
+            
+            $(".btn-state").click(function () {
+                
+                $(".btn-state").removeClass("active");
+
+                $(this).addClass("active");
+            });
+        });
+
+    </script>
+
+    <script>
+        document.addEventListener('click', function (e) {
+            if (e.target.tagName === 'BUTTON') {
+                e.target.style.outline = 'none';
+                // Add any other styles you want to remove default decoration
+            }
+        });
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#search-input").on("input", function () {
+                var searchText = $(this).val().toLowerCase();
+                filterTable(searchText);
+            });
+        });
+
+        function filterTable(searchText) {
+            $("#data-table tbody tr").each(function () {
+                var rowText = $(this).find("#PatientName").text().toLowerCase();
+                if (rowText.indexOf(searchText) === -1) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            });
+        }
+    </script>
+
 }
 

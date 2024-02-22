@@ -51,34 +51,72 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
             var query = await _context.Requests.CountAsync(e => e.Status == 6);
             return query;
         }
-        public async Task<List<ViewDashboradList>> RequestTableAsync(int state)
+        public async Task<List<ViewDashboradList>> RequestTableAsync(int state, int requesttype)
         {
-            var query = (from r in _context.Requests
-                        join rc in _context.RequestClients on r.RequestId equals rc.RequestId
-                        join p in _context.Physicians on r.PhysicianId equals p.PhysicianId into physicianGroup
-                        from physician in physicianGroup.DefaultIfEmpty()
-                        join re in _context.Regions on rc.RegionId equals re.RegionId into regionGroup
-                        from region in regionGroup.DefaultIfEmpty()
-                        where r.Status == state
-                        select new ViewDashboradList
-                        {
-                            RequestId = r.RequestId,
-                            PatientF = rc.FirstName,
-                            PatientL = rc.LastName,
-                            Email = rc.Email,
-                            Status = r.Status,
-                            DOB = new DateTime((int)rc.IntYear, int.Parse(rc.StrMonth), (int)rc.IntDate),
-                            RequestTypeId = r.RequestTypeId,
-                            RequestorF = r.FirstName,
-                            RequestorL = r.LastName,
-                            RequestedDate = r.CreatedDate,
-                            Phone = rc.PhoneNumber,
-                            PhysicianF = physician.FirstName,
-                            PhysicianL = physician.LastName,
-                            Address = rc.Address,
-                            Notes = rc.Notes,
-                            Region = region.Name
-                        }).ToList();
+            List<ViewDashboradList> query;
+            if(requesttype==0)
+            {
+                 query = (from r in _context.Requests
+                             join rc in _context.RequestClients on r.RequestId equals rc.RequestId
+                             join p in _context.Physicians on r.PhysicianId equals p.PhysicianId into physicianGroup
+                             from physician in physicianGroup.DefaultIfEmpty()
+                             join re in _context.Regions on rc.RegionId equals re.RegionId into regionGroup
+                             from region in regionGroup.DefaultIfEmpty()
+                             where r.Status == state
+                             select new ViewDashboradList
+                             {
+                                 RequestId = r.RequestId,
+                                 PatientF = rc.FirstName,
+                                 PatientL = rc.LastName,
+                                 Email = rc.Email,
+                                 Status = r.Status,
+                                 //DOB = rc.IntYear != null && rc.StrMonth != null && rc.IntDate != null ?
+                                 //new DateOnly((int)rc.IntYear, int.Parse(rc.StrMonth), (int)rc.IntDate):(DateOnly?)null,
+                                 DOB = new DateOnly((int)rc.IntYear, Convert.ToInt32(rc.StrMonth), (int)rc.IntDate),
+                                 RequestTypeId = r.RequestTypeId,
+                                 RequestorF = r.FirstName,
+                                 RequestorL = r.LastName,
+                                 RequestedDate = r.CreatedDate,
+                                 Phone = rc.PhoneNumber,
+                                 PhysicianF = physician.FirstName,
+                                 PhysicianL = physician.LastName,
+                                 Address = rc.Address,
+                                 Notes = rc.Notes,
+                                 Region = region.Name
+                             }).ToList();
+            }
+            else
+            {
+                 query = (from r in _context.Requests
+                             join rc in _context.RequestClients on r.RequestId equals rc.RequestId
+                             join p in _context.Physicians on r.PhysicianId equals p.PhysicianId into physicianGroup
+                             from physician in physicianGroup.DefaultIfEmpty()
+                             join re in _context.Regions on rc.RegionId equals re.RegionId into regionGroup
+                             from region in regionGroup.DefaultIfEmpty()
+                             where r.Status == state && r.RequestTypeId == requesttype
+                             select new ViewDashboradList
+                             {
+                                 RequestId = r.RequestId,
+                                 PatientF = rc.FirstName,
+                                 PatientL = rc.LastName,
+                                 Email = rc.Email,
+                                 Status = r.Status,
+                                 //DOB = rc.IntYear != null && rc.StrMonth != null && rc.IntDate != null ?
+                                 //new DateOnly((int)rc.IntYear, int.Parse(rc.StrMonth), (int)rc.IntDate):(DateOnly?)null,
+                                 DOB = new DateOnly((int)rc.IntYear, Convert.ToInt32(rc.StrMonth), (int)rc.IntDate),
+                                 RequestTypeId = r.RequestTypeId,
+                                 RequestorF = r.FirstName,
+                                 RequestorL = r.LastName,
+                                 RequestedDate = r.CreatedDate,
+                                 Phone = rc.PhoneNumber,
+                                 PhysicianF = physician.FirstName,
+                                 PhysicianL = physician.LastName,
+                                 Address = rc.Address,
+                                 Notes = rc.Notes,
+                                 Region = region.Name
+                             }).ToList();
+            }
+            
 
             return (List<ViewDashboradList>)query;
         }

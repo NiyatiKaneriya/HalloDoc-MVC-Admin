@@ -23,13 +23,12 @@ namespace HalloDoc_MVC_Admin.Controllers
             ViewBag.ConcludeCount = await _requestRepository.ConcludeCount();
             ViewBag.ToCloseCount = await _requestRepository.ToCloseCount();
             ViewBag.UnpaidCount = await _requestRepository.UnpaidCount();
-
-
+            
             return View();
         }
-        public async Task<IActionResult> GetRequestTable(int state)
+        public async Task<IActionResult> GetRequestTable(int state,int requesttype)
         {
-            List<ViewDashboradList> requestTableData = await _requestRepository.RequestTableAsync(state);
+            List<ViewDashboradList> requestTableData = await _requestRepository.RequestTableAsync(state,requesttype);
         
             return PartialView("_DashboardTable",requestTableData);
         }

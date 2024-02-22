@@ -1,7 +1,11 @@
 html {
     font-size: 14px;
 }
-
+body::-webkit-scrollbar {
+    width: 0;
+    background-color: transparent;
+   
+}
 @media (min-width: 768px) {
     html {
         font-size: 16px;
@@ -18,7 +22,7 @@ html {
 }
 
 body {
-    margin-bottom: 60px;
+   
     overflow-x:hidden;
 }
 .theme-button .back-btn {
@@ -34,7 +38,9 @@ body {
     color: white;
 }
 
-
+button:focus{
+    outline:none !important;
+}
 @media only screen and (max-width: 768px) {
     .login-body {
         position: relative;
@@ -66,16 +72,16 @@ body {
     background-color: #CFE2FF;
 }
 
-    #new:hover {
+    #new.active {
         background-color: #063982;
         color: white;
     }
-        #new:hover::after {
+        #new.active:after {
             position: absolute;
             content: '';
-            left: 42%;
+            left: 44%;
             border-style: solid;
-            border-width: 0px 25px 25px 25px;
+            border-width: 0px 20px 20px 20px;
             transform: rotate(180deg);
             border-color: transparent transparent #063982 transparent;
             transition: 1s;
@@ -88,16 +94,16 @@ body {
     
 }
 
-    #pending:hover {
+    #pending.active {
         background-color: #0AA2C0;
         color: white;
     }
-        #pending:hover::after {
+        #pending.active::after {
             position: absolute;
             content: '';
-            left: 42%;
+            left: 44%;
             border-style: solid;
-            border-width: 0px 25px 25px 25px;
+            border-width: 0px 20px 20px 20px;
             transform: rotate(180deg);
             border-color: transparent transparent #0AA2C0 transparent;
             transition: 1s;
@@ -109,17 +115,17 @@ body {
     background-color: #E0F7ED;
 }
 
-    #active:hover {
+    #active.active {
         background-color: #198754;
         color: white;
     }
 
-        #active:hover::after {
+        #active.active:after {
             position: absolute;
             content: '';
-            left: 42%;
+            left: 44%;
             border-style: solid;
-            border-width: 0px 25px 25px 25px;
+            border-width: 0px 20px 20px 20px;
             transform: rotate(180deg);
             border-color: transparent transparent #198754 transparent;
             transition: 1s;
@@ -131,16 +137,16 @@ body {
     background-color: #FFDDED;
 }
 
-    #conclude:hover {
+    #conclude.active {
         background-color: #AB296A;
         color: white;
     }
-        #conclude:hover::after {
+        #conclude.active:after {
             position: absolute;
             content: '';
-            left: 42%;
+            left: 44%;
             border-style: solid;
-            border-width: 0px 25px 25px 25px;
+            border-width: 0px 20px 20px 20px;
             transform: rotate(180deg);
             border-color: transparent transparent #AB296A transparent;
             transition: 1s;
@@ -152,16 +158,16 @@ body {
     background-color: #CFE2FF;
 }
 
-    #toclose:hover {
+    #toclose.active {
         background-color: #0A58CA;
         color: white;
     }
-        #toclose:hover::after {
+        #toclose.active:after {
             position: absolute;
             content: '';
-            left: 42%;
+            left: 44%;
             border-style: solid;
-            border-width: 0px 25px 25px 25px;
+            border-width: 0px 20px 20px 20px;
             transform: rotate(180deg);
             border-color: transparent transparent #0A58CA transparent;
             transition: 1s;
@@ -173,17 +179,33 @@ body {
     background-color: #E2D9F3;
 }
 
-    #unpaid:hover {
+    #unpaid.active {
         background-color: #8C68CD;
         color: white;
     }
-        #unpaid:hover::after {
+        #unpaid.active:after {
             position: absolute;
             content: '';
-            left: 42%;
+            left: 44%;
             border-style: solid;
-            border-width: 0px 25px 25px 25px;
+            border-width: 0px 20px 20px 20px;
             transform: rotate(180deg);
             border-color: transparent transparent #8C68CD transparent;
             transition: 1s;
         }
+
+.bg-1 {
+    background-color: #60bc60;
+}
+.bg-2 {
+    background-color: #ee9125;
+}
+.bg-4 {
+    background-color: #e36478;
+}
+.bg-3 {
+    background-color: #007fc7;
+}
+.bg-5 {
+    background-color: #943db8;
+}
