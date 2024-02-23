@@ -16,5 +16,7 @@ namespace HalloDoc_MVC_AdminRepositories.Repository.Interface
         public  Task<int> ToCloseCount();
         public Task<int> UnpaidCount();
         public  Task<List<ViewDashboradList>> RequestTableAsync(int state,int requesttype);
+        public Task<ViewCaseModel> GetViewCase(int requestclientid);
+        public Task<Boolean> SaveViewCase(ViewCaseModel viewCase);
     }
 }

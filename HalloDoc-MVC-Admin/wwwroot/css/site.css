@@ -209,3 +209,82 @@ button:focus{
 .bg-5 {
     background-color: #943db8;
 }
+
+input#phone {
+    padding-left: 47px !important;
+    padding: 16px 0px;
+}
+
+input#phone-frd {
+    padding-left: 47px !important;
+    padding: 16px 0px;
+}
+
+input#phone-concierge {
+    padding-left: 47px !important;
+    padding: 16px 0px;
+}
+
+input#phone-bp {
+    padding-left: 47px !important;
+    padding: 16px 0px;
+}
+
+.intl-tel-input .flag-dropdown .selected-flag {
+    padding: 11px 16px 11px 6px;
+}
+
+.intl-tel-input {
+    z-index: 99;
+    width: 100%;
+}
+
+.iti__selected-flag {
+    top: 12px;
+    height: 33px !important;
+    border-radius: 4px;
+    transition: .3s;
+}
+
+.iti {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.iti-flag {
+    box-shadow: none;
+}
+
+.iti--allow-dropdown .iti__flag-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.intl-tel-input .selected-flag:focus {
+    outline: none;
+}
+
+.iti--allow-dropdown .iti__flag-container:hover .iti__selected-flag {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.iti--allow-dropdown input {
+    padding-right: 6px;
+    padding-left: 52px;
+    margin-left: 0;
+}
+
+.iti__country-list {
+    border-radius: 4px !important;
+    z-index: 999 !important;
+    box-shadow: 0 0 16px 0 rgb(0 0 0 / 8%) !important;
+    border: 1px solid #ececec !important;
+    width: 350px !important;
+    overflow-x: hidden;
+}
+
+.iti--inline-dropdown .iti__dropdown-content {
+    z-index: 20 !important;
+}

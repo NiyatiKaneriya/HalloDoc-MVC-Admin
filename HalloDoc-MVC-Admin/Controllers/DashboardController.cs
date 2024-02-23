@@ -32,6 +32,18 @@ namespace HalloDoc_MVC_Admin.Controllers
         
             return PartialView("_DashboardTable",requestTableData);
         }
+        public async Task<IActionResult> ViewCase(int requestclientid)
+        {
+            ViewCaseModel viewCaseModel =await _requestRepository.GetViewCase(requestclientid);
 
+            return View("ViewCase",viewCaseModel);
+        }
+        public async Task<IActionResult> SaveViewCase(ViewCaseModel viewCaseModel)
+        {
+            await _requestRepository.SaveViewCase(viewCaseModel);
+
+            return View("ViewCase");
+        }
+        
     }
 }

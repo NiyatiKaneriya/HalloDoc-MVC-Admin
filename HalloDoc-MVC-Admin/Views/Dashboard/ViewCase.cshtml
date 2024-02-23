@@ -1,0 +1,130 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model HalloDoc_MVC_AdminDBEntity.ViewModels.ViewCaseModel
+<section class="container-fluid w-75 my-5" >
+    <div class="d-flex justify-content-between m-2">
+        <h2>View Resarvation </h2>
+        <div>
+            <a asp-action="Index" asp-controller="Dashboard" class="mx-5 btn btn-outline-info">
+                <i class="fa-solid fa-angle-left"></i> back
+            </a>
+        </div>
+    </div>
+    <div class="card border-0 shadow">
+        <form class="row  mx-3 my-3" asp-controller="Dashboard" asp-action="SaveViewCase">
+
+            <div class="col-12 mb-3">
+                <h4>Patient Information</h4>
+            </div>
+            <div class="col-12 mb-3">
+                <small class="text-muted">Confirmation Number</small>
+                <h4 class="text-info">MD01324326TFE456</h4>
+                <input asp-for="RequestClientId" hidden />
+            </div>
+            <div class="col-12 mb-3">
+                <div class="form-floating">
+                    <textarea asp-for="Notes" class="form-control" placeholder="" id="floatingTextarea"
+                              style="height: 100px" readonly></textarea>
+                    <label for="floatingTextarea" class="text-muted">Brief Details of symptoms (optional) </label>
+                </div>
+            </div>
+            <div class=" col-md-6 col-sm-12 mb-3">
+                <div class="form-floating ">
+                    <input asp-for="PatientF" type="text" class="form-control" id="FirstName" placeholder="First Name" readonly>
+                    <label for="floatingInput" class="text-muted">First Name</label>
+                </div>
+            </div>
+            <div class=" col-md-6 col-sm-12 mb-3">
+                <div class="form-floating ">
+                    <input asp-for="PatientL" type="text" class="form-control" id="LastName" placeholder="Last Name" readonly>
+                    <label for="floatingInput" class="text-muted">Last Name</label>
+                </div>
+            </div>
+            <div class=" col-md-6 col-sm-12 mb-3">
+                <div class="form-floating ">
+                    <input asp-for="DOB" id="DOB" class="form-control" type="date" placeholder="DOB" readonly />
+                    <label for="floatingInput" class="text-muted">DOB</label>
+                </div>
+            </div>
+            <div class=" col-md-6 col-sm-12 mb-3">
+                <div class="form-floating mb-3">
+                    <input asp-for="Phone" id="phone" type="tel" class="form-control" readonly>
+                </div>
+            </div>
+            <div class=" col-md-6 col-sm-12 mb-3">
+                <div class="form-floating ">
+                    <input asp-for="Email" id="Email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" readonly>
+                    <label for="floatingInput" class="text-muted">Email</label>
+                </div>
+            </div>
+            <div class=" col-md-6 col-sm-12 mb-3">
+                <a class="btn btn-lg btn-outline-info" id="Editbtn">
+                    Edit
+                </a>
+                <input type="submit" class="btn btn-lg btn-outline-info" id="Savebtn" value="Save" disabled>
+                   
+            </div>
+            <div class="col-12 mb-3">
+                <h3>Patient Location</h3>
+            </div>
+            <div class=" col-md-6 col-sm-12 mb-3">
+                <div class="form-floating ">
+                    <input asp-for="Region" type="text" class="form-control" id="Region" placeholder="Street" readonly>
+                    <label for="floatingInput" class="text-muted">Region</label>
+                </div>
+            </div>
+            <div class=" col-md-6 col-sm-12 mb-3">
+                <div class="form-floating">
+                    <input asp-for="Address" type="text" class="form-control" id="Address" placeholder="Room" readonly>
+                    <label for="floatingInput" class="text-muted">Business Name / Address</label>
+                </div>
+            </div>
+
+            <div class=" col-md-6 col-sm-12 mb-3">
+                <div class="form-floating">
+                    <input asp-for="Address" type="text" class="form-control" id="Room" placeholder="Room" readonly>
+                    <label for="floatingInput" class="text-muted">Room #/ Suite</label>
+                </div>
+            </div>
+        </form>
+
+        <div class="d-flex flex-row-reverse gap-2 m-3">
+            <a class="btn btn-lg btn-danger">
+                Cancel
+            </a>
+            <a class="btn btn-lg btn-info">
+                View Notes
+            </a>
+            <a class="btn btn-lg btn-info">
+                Assign
+            </a>
+
+        </div>
+    </div>
+    
+</section>
+
+@section Scripts{
+    <script>
+        $(".request-type-btn").click(function () {
+            var requesttype = $(this).data("requesttype");
+            filterData(state, requesttype);
+        });
+
+        document.getElementById("Editbtn").addEventListener("click", function (event) {
+            event.preventDefault();
+            document.getElementById("FirstName").removeAttribute("readonly");
+            document.getElementById("LastName").removeAttribute("readonly");
+            document.getElementById("DOB").removeAttribute("readonly");
+            document.getElementById("phone").removeAttribute("readonly");
+            document.getElementById("Region").removeAttribute("readonly");
+            document.getElementById("Address").removeAttribute("readonly");
+            document.getElementById("Room").removeAttribute("readonly");
+            document.getElementById("Savebtn").removeAttribute("disabled");
+           
+        });
+    </script>
+}

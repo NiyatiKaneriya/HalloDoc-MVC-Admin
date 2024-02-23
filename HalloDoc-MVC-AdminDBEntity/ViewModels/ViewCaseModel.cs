@@ -6,28 +6,28 @@ using System.Threading.Tasks;
 
 namespace HalloDoc_MVC_AdminDBEntity.ViewModels
 {
-    public class ViewDashboradList
+    public class ViewCaseModel
     {
         public string PatientF { get; set; }
         public string? PatientL { get; set; }
-        public string Patient => $"{PatientF} {PatientL}";
-       
-        public string? RequestorF { get; set; }
-        public string? RequestorL { get; set; }
-        public string Requestor => $"{RequestorF} {RequestorL}";
+        //public string Patient => $"{PatientF} {PatientL}";
 
-        public DateTime RequestedDate { get; set; }
+        //public string? RequestorF { get; set; }
+        //public string? RequestorL { get; set; }
+        //public string Requestor => $"{RequestorF} {RequestorL}";
 
-        public string PhysicianF { get; set; }
-        public string? PhysicianL { get; set; }
-        public string Physician => $"{PhysicianF} {PhysicianL}";
+        //public DateTime RequestedDate { get; set; }
+
+        //public string PhysicianF { get; set; }
+        //public string? PhysicianL { get; set; }
+        //public string Physician => $"{PhysicianF} {PhysicianL}";
 
         public DateOnly? DOB { get; set; }
 
-        public string Phone{ get; set; }       
-        
-        public string? Email { get; set; }
-        
+        public string Phone { get; set; }
+
+        public string Email { get; set; }
+
         public short Status { get; set; }
 
         public string Region { get; set; }
@@ -40,7 +40,7 @@ namespace HalloDoc_MVC_AdminDBEntity.ViewModels
         public int RequestTypeId { get; set; }
         public int RequestId { get; set; }
 
-       
+        public int RequestClientId { get; set; }
 
         public int state
         {
@@ -73,8 +73,6 @@ namespace HalloDoc_MVC_AdminDBEntity.ViewModels
             set { Status = (short)value; } // Set the db status here
         }
 
-        public int RequestClientId { get; set; }
-        public string? PhoneO { get; set; }
+       
     }
-
 }

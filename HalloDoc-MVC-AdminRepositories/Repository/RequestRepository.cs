@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace HalloDoc_MVC_AdminRepositories.Repository
 {
@@ -53,7 +54,7 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
         }
         public async Task<List<ViewDashboradList>> RequestTableAsync(int state, int requesttype)
         {
-              //List<int> priceList = status.Split(',').Select(int.Parse).ToList();
+             
             List<int> statusList = new List<int>();
             if (state == 5)
             {
@@ -94,20 +95,20 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
                              where statusList.Contains(r.Status)
                           select new ViewDashboradList
                              {
+                              RequestClientId = rc.RequestClientId,
                                  RequestId = r.RequestId,
                                  PatientF = rc.FirstName,
                                  PatientL = rc.LastName,
-                                 Email = rc.Email,
+                                 Email = r.Email,
                                  Status = r.Status,
-                                 //DOB = rc.IntYear != null && rc.StrMonth != null && rc.IntDate != null ?
-                                 //new DateOnly((int)rc.IntYear, int.Parse(rc.StrMonth), (int)rc.IntDate):(DateOnly?)null,
                                  DOB = new DateOnly((int)rc.IntYear, Convert.ToInt32(rc.StrMonth), (int)rc.IntDate),
                                  RequestTypeId = r.RequestTypeId,
                                  RequestorF = r.FirstName,
                                  RequestorL = r.LastName,
                                  RequestedDate = r.CreatedDate,
                                  Phone = rc.PhoneNumber,
-                                 PhysicianF = physician.FirstName,
+                              PhoneO = r.PhoneNumber,
+                              PhysicianF = physician.FirstName,
                                  PhysicianL = physician.LastName,
                                  Address = rc.Address,
                                  Notes = rc.Notes,
@@ -125,19 +126,19 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
                              where statusList.Contains(r.Status)  && r.RequestTypeId == requesttype
                              select new ViewDashboradList
                              {
+                                 RequestClientId = rc.RequestClientId,
                                  RequestId = r.RequestId,
                                  PatientF = rc.FirstName,
                                  PatientL = rc.LastName,
-                                 Email = rc.Email,
+                                 Email = r.Email,
                                  Status = r.Status,
-                                 //DOB = rc.IntYear != null && rc.StrMonth != null && rc.IntDate != null ?
-                                 //new DateOnly((int)rc.IntYear, int.Parse(rc.StrMonth), (int)rc.IntDate):(DateOnly?)null,
                                  DOB = new DateOnly((int)rc.IntYear, Convert.ToInt32(rc.StrMonth), (int)rc.IntDate),
                                  RequestTypeId = r.RequestTypeId,
                                  RequestorF = r.FirstName,
                                  RequestorL = r.LastName,
                                  RequestedDate = r.CreatedDate,
                                  Phone = rc.PhoneNumber,
+                                 PhoneO = r.PhoneNumber,
                                  PhysicianF = physician.FirstName,
                                  PhysicianL = physician.LastName,
                                  Address = rc.Address,
@@ -148,6 +149,47 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
             
 
             return (List<ViewDashboradList>)query;
+        }
+
+        public async Task<ViewCaseModel> GetViewCase(int requestclientid)
+        {
+            var query = await (from r in _context.Requests
+                        join rc in _context.RequestClients on r.RequestId equals rc.RequestId
+                        join re in _context.Regions on rc.RegionId equals re.RegionId into regionGroup
+                        from region in regionGroup.DefaultIfEmpty()
+                        where rc.RequestClientId == requestclientid
+                        select new ViewCaseModel
+                        {
+                            RequestId = r.RequestId,
+                            PatientF = rc.FirstName,
+                            PatientL = rc.LastName,
+                            Email = r.Email,
+                            Status = r.Status,
+                            DOB = new DateOnly((int)rc.IntYear, Convert.ToInt32(rc.StrMonth), (int)rc.IntDate),
+                            Phone = rc.PhoneNumber,
+                            
+                            Address = rc.Address,
+                            Notes = rc.Notes,
+                            Region = region.Name
+                        }).FirstOrDefaultAsync() ;
+            return query;
+
+        }
+
+        public async Task<Boolean> SaveViewCase(ViewCaseModel viewCase)
+        {
+
+            var requestclient = await _context.RequestClients.Where(r => r.RequestClientId == viewCase.RequestClientId).FirstAsync();
+             
+            requestclient.FirstName = viewCase.PatientF;
+                requestclient.LastName = viewCase.PatientL;
+            requestclient.PhoneNumber = viewCase.Phone;
+            requestclient.Address = viewCase.Address;
+            //requestclient.Region = viewCase.Region;
+            _context.RequestClients.Update(requestclient);
+            await _context.SaveChangesAsync();
+
+            return true;
         }
 
     }

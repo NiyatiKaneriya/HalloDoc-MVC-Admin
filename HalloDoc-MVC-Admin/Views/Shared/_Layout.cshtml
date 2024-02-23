@@ -21,7 +21,7 @@
                     <div>   Welcome <span class="fw-bolder"> @* @CV.UserName() *@ </span>     </div>
                     <a asp-action="Logout" asp-controller="Login" class="btn btn-outline-info mx-2 " id="logout-btn">Logout</a>
                     <button type="button" class="btn btn-outline-info mr-5 pr-5 " >
-                        <i class="fa fa-moon-o " aria-hidden="true"></i>
+                        <i class="fa-regular fa-moon"></i>
                     </button>
                 </div>
 
@@ -50,6 +50,7 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@19.2.16/build/js/intlTelInput.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
     @await RenderSectionAsync("DashboardScripts", required: false)
