@@ -288,3 +288,15 @@ input#phone-bp {
 .iti--inline-dropdown .iti__dropdown-content {
     z-index: 20 !important;
 }
+
+.notespara {
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.notebtn{
+    text-align : left;
+}

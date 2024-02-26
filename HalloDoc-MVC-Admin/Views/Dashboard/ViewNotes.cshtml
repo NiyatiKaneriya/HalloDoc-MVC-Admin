@@ -1,0 +1,90 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model HalloDoc_MVC_AdminDBEntity.ViewModels.ViewNotesModel
+
+<section class="container-fluid w-75">
+    <div class="row my-4 ">
+        <div class="col-12 d-flex justify-content-between mb-3">
+            <div>
+                <h2>Notes</h2>
+            </div>
+            <div>
+                <a asp-action="Index" asp-controller="Dashboard" class=" btn btn-outline-info">
+                    <i class="fa-solid fa-angle-left"></i> back
+                </a>
+            </div>
+        </div>
+        <div class="col-6 p-2">
+            <div class="btn notebtn d-flex border border-1 rounded " id="transferbtn">
+                <h2 class="text-center align-content-center"><i class="fa-solid fa-right-left"></i></h2>
+                <div class="ps-3">
+                    <h5>Transfer Notes</h5>
+                </div>
+            </div>
+                       
+        </div>
+        <div class="col-6 p-2">
+            <div class="btn notebtn d-flex border border-1 rounded " id="physicianbtn">
+                <h2 class="text-center align-content-center"><i class="fa-solid fa-user-doctor"></i></h2>
+                <div class="ps-3">
+                    <h5>Physician Notes</h5>
+                    <p class="notespara" id="txtPhysicianNotes">@Model.PhysicianNotes</p>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-6 p-2">
+            <div class="btn notebtn d-flex border border-1 rounded " id="adminbtn">
+                <h2 class="text-center align-content-center"><i class="fa-solid fa-user-tie"></i></h2>
+                <div class="ps-3">
+                    <h5>Admin Notes</h5>
+                    <p class="notespara text-start" id="txtAdminNotes">@Model.AdminNotes</p>
+                </div>
+            </div>
+        </div>
+       
+        </div>
+        <form asp-controller="Dashboard" asp-action="SaveViewNotes">
+            <input asp-for="Requestid" type=hidden/>
+        <div class="col-12 mb-3">
+            <div class="form-floating">
+                <textarea  class="form-control" id="notetext"
+                          style="height: 150px"></textarea>
+                <label for="floatingTextarea" class="text-muted" id="note">Notes</label>
+            </div>
+        </div>
+        <div class="col-12 d-flex flex-row-reverse">
+            <input class="btn btn-info" type="submit" value="Save Changes">              
+            
+        </div>
+        </form>
+        
+    
+</section>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+            $("#adminbtn").click(function () {
+                var s = $("#txtAdminNotes").html();
+                $("#notetext").val(s);                
+                $("#notetext").attr("name","AdminNotes");
+                $("#note").text( "Admin Notes");
+                $("#notetext").removeAttr("disabled");
+            });
+            
+            $("#physicianbtn").click(function () {
+                var s = $("#txtPhysicianNotes").html();
+                $("#notetext").val(s);
+                $("#notetext").attr("name","PhysicianNotes");
+                $("#note").text( "Physician Notes");
+                $("#notetext").attr("disabled","true");
+            });
+        });
+
+    </script>
+}

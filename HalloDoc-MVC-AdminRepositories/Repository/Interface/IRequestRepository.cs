@@ -18,5 +18,7 @@ namespace HalloDoc_MVC_AdminRepositories.Repository.Interface
         public  Task<List<ViewDashboradList>> RequestTableAsync(int state,int requesttype);
         public Task<ViewCaseModel> GetViewCase(int requestclientid);
         public Task<Boolean> SaveViewCase(ViewCaseModel viewCase);
+        public Task<ViewNotesModel> GetViewNotes(int requestid);
+        public Task<Boolean> SaveViewNotes(  int? Requestid, string? AdminNotes);
     }
 }

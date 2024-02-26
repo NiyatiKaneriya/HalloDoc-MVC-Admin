@@ -8,171 +8,161 @@
 
 
        <div class="w-100 overflow-scroll">
-            <table class="table w-100">
-                <thead>
-                    <tr class="border-bottom ">
-                        <th class="d-none">RequestId</th>
-                        <th class="d-none">RequestClientId</th>
-                        <th class="d-none">requesttypeid</th>
-                        <th>Name</th>
-                        <th></th>
-                @if (Model[0].state == 1 || Model[0].state == 2 || Model[0].state == 3 || Model[0].state == 4 || Model[0].state == 5)
+    @if (Model.Count > 0)
+    {
+        <table class="table w-100">
+            <thead>
+                <tr class="border-bottom ">
+                    <th class="d-none">RequestId</th>
+                    <th class="d-none">RequestClientId</th>
+                    <th class="d-none">requesttypeid</th>
+                    <th>Name</th>
+                    <th></th>
+                    @if (Model[0].state == 1 || Model[0].state == 2 || Model[0].state == 3 || Model[0].state == 4 || Model[0].state == 5)
                     {
                         <th>Date of Birth</th>
                     }
-                @if (Model[0].state == 1 || Model[0].state == 2 || Model[0].state == 3)
+                    @if (Model[0].state == 1 || Model[0].state == 2 || Model[0].state == 3)
                     {
                         <th>Requestor</th>
                     }
-                @if (Model[0].state == 1)
+                    @if (Model[0].state == 1)
                     {
                         <th>Requested Date</th>
                     }
-                @if (Model[0].state == 2 || Model[0].state == 3 || Model[0].state == 4 || Model[0].state == 5 || Model[0].state == 6)
+                    @if (Model[0].state == 2 || Model[0].state == 3 || Model[0].state == 4 || Model[0].state == 5 || Model[0].state == 6)
                     {
                         <th>Physician Name</th>
                     }
-                @if (Model[0].state == 2 || Model[0].state == 3 || Model[0].state == 4 || Model[0].state == 5 || Model[0].state == 6)
+                    @if (Model[0].state == 2 || Model[0].state == 3 || Model[0].state == 4 || Model[0].state == 5 || Model[0].state == 6)
                     {
                         <th>Date Of Service</th>
                     }
 
-                @if (Model[0].state == 1 || Model[0].state == 2 || Model[0].state == 3 || Model[0].state == 4 || Model[0].state == 6)
+                    @if (Model[0].state == 1 || Model[0].state == 2 || Model[0].state == 3 || Model[0].state == 4 || Model[0].state == 6)
                     {
                         <th>Phone</th>
-                    }                      
-                        <th>Address</th>
-                @if (Model[0].state == 1 || Model[0].state == 2 || Model[0].state == 3 || Model[0].state == 5)
+                    }
+                    <th>Address</th>
+                    @if (Model[0].state == 1 || Model[0].state == 2 || Model[0].state == 3 || Model[0].state == 5)
                     {
                         <th>Notes</th>
                     }
-                        <th>chat With</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody class="text-light">
-                    @foreach (var item in Model)
-                    {
+                    <th>chat With</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody class="text-light">
+                @foreach (var item in Model)
+                {
                     <tr class=" border-bottom p-2 bg-@item.RequestTypeId">
-                    <td class="d-none" ></td>
-                    <td class="d-none" >@item.RequestClientId</td>
+                        <td class="d-none"></td>
+                        <td class="d-none">@item.RequestClientId</td>
                         <td class="d-none">@item.RequestTypeId</td>
-                            <td id="PatientName">@item.Patient</td>
-                    <td> <a href="mailto:@item.Email?subject=Comments" class="text-white"><i class="fa-regular fa-envelope"></i></a> </td>
-                    @if (Model[0].state == 1 || Model[0].state == 2 || Model[0].state == 3 || Model[0].state == 4 || Model[0].state == 5)
+                        <td id="PatientName">@item.Patient</td>
+                        <td> <a href="mailto:@item.Email?subject=Comments" class="text-white"><i class="fa-regular fa-envelope"></i></a> </td>
+                        @if (item.state == 1 || item.state == 2 || item.state == 3 || item.state == 4 || item.state == 5)
                         {
-                        <td>@item.DOB </td>
+                            <td>@item.DOB </td>
                         }
-                    @if (Model[0].state == 1 || Model[0].state == 2 || Model[0].state == 3)
+                        @if (item.state == 1 || item.state == 2 || item.state == 3)
                         {
                             <td>@item.Requestor</td>
                         }
-                    @if (Model[0].state == 1)
+                        @if (item.state == 1)
                         {
                             <td>@item.RequestedDate</td>
                         }
-                    @if (Model[0].state == 2 || Model[0].state == 3 || Model[0].state == 4 || Model[0].state == 5 || Model[0].state == 6)
+                        @if (item.state == 2 || item.state == 3 || item.state == 4 || item.state == 5 || item.state == 6)
                         {
                             <td>@item.Physician</td>
                         }
-                    @if (Model[0].state == 2 || Model[0].state == 3 || Model[0].state == 4 || Model[0].state == 5 || Model[0].state == 6)
+                        @if (item.state == 2 || item.state == 3 || item.state == 4 || item.state == 5 || item.state == 6)
                         {
                             <td>20-2-25</td>
                         }
-                    @if (Model[0].state == 1 || Model[0].state == 2 || Model[0].state == 3 || Model[0].state == 4 || Model[0].state == 6)
+                        @if (item.state == 1 || item.state == 2 || item.state == 3 || item.state == 4 || item.state == 6)
                         {
-                        <td><button type="button" class="btn btn-outline-light bg-transparent"><i class="fa-solid fa-phone"></i> @item.Phone</button><br>
-                            <small>(Patient)</small><br>
-                            @if(item.RequestTypeId != 1)
-                            {
-                                <button type="button" class="btn btn-outline-light bg-transparent"><i class="fa-solid fa-phone"></i> @item.PhoneO</button><br />
-                                if(item.RequestTypeId == 2){ <small>(Family/friend)</small> }
-                                if(item.RequestTypeId == 3){ <small>(Concierge)</small> }
-                                if (item.RequestTypeId == 4){ <small>(Business Partner)</small> }
-                            }
-                        </td>
+                            <td>
+                                <button type="button" class="btn btn-outline-light bg-transparent"><i class="fa-solid fa-phone"></i> @item.Phone</button><br>
+                                <small>(Patient)</small><br>
+                                @if (item.RequestTypeId != 1)
+                                {
+                                    <button type="button" class="btn btn-outline-light bg-transparent"><i class="fa-solid fa-phone"></i> @item.PhoneO</button>
+
+                                    <br />
+                                    if (item.RequestTypeId == 2)
+                                    {
+                                        <small>(Family/friend)</small>
+                                    }
+                                    if (item.RequestTypeId == 3)
+                                    {
+                                        <small>(Concierge)</small>
+                                    }
+                                    if (item.RequestTypeId == 4)
+                                    {
+                                        <small>(Business Partner)</small>
+                                    }
+                                }
+                            </td>
                         }
-                            <td>@item.Address</td>
-                    @if (Model[0].state == 1 || Model[0].state == 2 || Model[0].state == 3 || Model[0].state == 5)
+                        <td>@item.Address</td>
+                        @if (item.state == 1 || item.state == 2 || item.state == 3 || item.state == 5)
                         {
                             <td>@item.Notes</td>
                         }
-                            
-                            <td>
 
-                        @if (Model[0].state == 2 || Model[0].state == 3 || Model[0].state == 4 || Model[0].state == 5 || Model[0].state == 6)
+                        <td>
+
+                            @if (item.state == 2 || item.state == 3 || item.state == 4 || item.state == 5 || item.state == 6)
                             {
                                 <button type="button" class="btn btn-outline-light bg-transparent"><i class="fa fa-solid fa-user"></i> Petient</button>
                             }
-                        <button type="button" class="btn btn-outline-light bg-transparent"><i class="fa-solid fa-user-nurse"></i> Provider </button>
-                            </td>
-                            <td>
-                                <div class="dropdown bg-transparent">
-                                    <button class="btn btn-outline-light bg-transparent dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Actions
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <button type="button" class="btn btn-outline-light bg-transparent"><i class="fa-solid fa-user-nurse"></i> Provider </button>
+                        </td>
+                        <td>
+                            <div class="dropdown bg-transparent">
+                                <button class="btn btn-outline-light bg-transparent dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Actions
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
-                                <li><a class="dropdown-item ViewCasebtn" asp-controller="Dashboard" asp-route-requestclientid="@item.RequestClientId" asp-action="ViewCase"><i class="fa-regular fa-file-lines"></i> View Case</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-notes-medical"></i> View Notes</a></li>
-                                        @if (item.state == 1)
-                                        {
-                                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-notes-medical"></i> Assign Case</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-notes-medical"></i> Cancel Case</a></li>
-                                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-ban"></i> Block Patient</a></li>
-                                        }                       
-                                        @if (item.state == 3)
-                                        {
-                                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-arrow-right-arrow-left"></i> Transfer</a></li>
-                                            <li><a class="dropdown-item" href="#"><i class="fa-regular fa-handshake"></i> Send Agreement</a></li>
-                                        }
-                                        @if (item.state == 3 || item.state == 5)
-                                        {
-                                    <li><a class="dropdown-item" href="#"><i class="fa-regular fa-circle-xmark"></i> Clear Case</a></li>
-                                        }                        
-                                        @if (item.state == 2 || item.state == 4 || item.state == 5)
-                                        {
-                                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-clipboard-check"></i> Order</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-file-signature"></i> Doctor Note</a></li>
-                                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-file-waveform"></i> Encounter</a></li>
-                                        }
-                                        @if (item.state > 1)
-                                        {
-                                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-file-arrow-up"></i> View Uploads</a></li>
-                                        }
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+                                    <li><a class="dropdown-item ViewCasebtn" asp-controller="Dashboard" asp-route-requestclientid="@item.RequestClientId" asp-action="ViewCase"><i class="fa-regular fa-file-lines"></i> View Case</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Dashboard" asp-route-requestid="@item.RequestId" asp-action="ViewNotes"><i class="fa-solid fa-notes-medical"></i> View Notes</a></li>
+                                    @if (item.state == 1)
+                                    {
+                                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-notes-medical"></i> Assign Case</a></li>
+                                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-notes-medical"></i> Cancel Case</a></li>
+                                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-ban"></i> Block Patient</a></li>
+                                    }
+                                    @if (item.state == 3)
+                                    {
+                                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-arrow-right-arrow-left"></i> Transfer</a></li>
+                                        <li><a class="dropdown-item" href="#"><i class="fa-regular fa-handshake"></i> Send Agreement</a></li>
+                                    }
+                                    @if (item.state == 3 || item.state == 5)
+                                    {
+                                        <li><a class="dropdown-item" href="#"><i class="fa-regular fa-circle-xmark"></i> Clear Case</a></li>
+                                    }
+                                    @if (item.state == 2 || item.state == 4 || item.state == 5)
+                                    {
+                                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-clipboard-check"></i> Order</a></li>
+                                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-file-signature"></i> Doctor Note</a></li>
+                                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-file-waveform"></i> Encounter</a></li>
+                                    }
+                                    @if (item.state > 1)
+                                    {
+                                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-file-arrow-up"></i> View Uploads</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
         </div>
 
-@section Scripts{
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-
-        // $(".ViewCasebtn").click(function () {
-        //     var requestid = $(this).data("requestid");
-        //     getViewdata(requestid);
-        // });
-
-        // function getViewdata(requestid) {
-        //     $.ajax({
-        //         url: '/Dashboard/ViewCase',
-        //         type: 'GET',
-        //         data: { requestid: requestid },
-        //         success: function (data) {
-        //             $('#data-table').html(data);
-        //         },
-        //         error: function (xhr, status, error) {
-        //             console.error("Error occurred: " + error);
-        //         }
-        //     });
-        // }
-    </script>
-   
-}
 
 

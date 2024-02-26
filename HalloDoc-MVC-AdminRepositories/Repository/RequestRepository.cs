@@ -192,5 +192,31 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
             return true;
         }
 
+        public async Task<ViewNotesModel> GetViewNotes(int requestid)
+        {
+            var query = await (from note in _context.RequestNotes
+                               where note.RequestId == requestid
+                               select new ViewNotesModel
+                               {
+                                   Requestid = note.RequestId,
+                                   AdminNotes =note.AdminNotes,
+                                   PhysicianNotes = note.PhysicianNotes,
+                                   
+                               }).FirstOrDefaultAsync();
+            return query;
+
+        }
+        public async Task<Boolean> SaveViewNotes(int? Requestid, string? AdminNotes)
+        {
+
+            var request = await _context.RequestNotes.Where(r => r.RequestId == Requestid).FirstAsync();
+
+            //request.PhysicianNotes = PhysicianNotes;          
+            request.AdminNotes = AdminNotes;
+            _context.RequestNotes.Update(request);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

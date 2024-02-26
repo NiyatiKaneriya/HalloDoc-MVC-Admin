@@ -44,6 +44,19 @@ namespace HalloDoc_MVC_Admin.Controllers
 
             return View("ViewCase");
         }
-        
+        public async Task<IActionResult> ViewNotes(int requestid)
+        {
+            ViewNotesModel viewNotesModel = await _requestRepository.GetViewNotes(requestid);
+
+            return View("ViewNotes", viewNotesModel);
+        }
+        public async Task<IActionResult> SaveViewNotes(int? Requestid, string? AdminNotes ,string PhysicianNotes)
+        {
+            await _requestRepository.SaveViewNotes(Requestid, AdminNotes);
+            ViewNotesModel viewNotesModel = await _requestRepository.GetViewNotes((int)Requestid);
+
+            return View("ViewNotes", viewNotesModel);
+        }
+
     }
 }
