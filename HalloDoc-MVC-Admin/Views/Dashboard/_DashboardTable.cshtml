@@ -132,7 +132,7 @@
                                     @if (item.state == 1)
                                     {
                                         <li><a class="dropdown-item" href="#"><i class="fa-solid fa-notes-medical"></i> Assign Case</a></li>
-                                        <li><a class="btn dropdown-item cancelpopup" data-bs-toggle="modal" data-bs-target="#cancelmodal"><i class="fa-solid fa-notes-medical"></i> Cancel Case</a></li>
+                                        <li><a class="btn dropdown-item cancelpopup" data-bs-toggle="modal" data-bs-target="#cancelmodal" data-bs-requestid="@item.RequestId" data-bs-patientname="@item.Patient"><i class="fa-solid fa-notes-medical"></i> Cancel Case</a></li>
                                         <li><a class="dropdown-item" href="#"><i class="fa-solid fa-ban"></i> Block Patient</a></li>
                                     }
                                     @if (item.state == 3)
@@ -155,7 +155,7 @@
                                         <li><a class="dropdown-item" href="#"><i class="fa-solid fa-file-arrow-up"></i> View Uploads</a></li>
                                     }
                                 </ul>
-                            </div>
+                            </div> 
                         </td>
                     </tr>
                 }
