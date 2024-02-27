@@ -127,12 +127,12 @@
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
-                                    <li><a class="dropdown-item ViewCasebtn" asp-controller="Dashboard" asp-route-requestclientid="@item.RequestClientId" asp-action="ViewCase"><i class="fa-regular fa-file-lines"></i> View Case</a></li>
-                                    <li><a class="dropdown-item" asp-controller="Dashboard" asp-route-requestid="@item.RequestId" asp-action="ViewNotes"><i class="fa-solid fa-notes-medical"></i> View Notes</a></li>
+                                    <li><a class="dropdown-item ViewCasebtn" asp-controller="Dashboard" asp-route-requestclientid="@item.RequestClientId" asp-action="ViewCase"><i class="fa-regular fa-file-lines"></i>View Case</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Dashboard" asp-route-id="@item.RequestId" asp-action="ViewNotes"><i class="fa-solid fa-notes-medical"></i> View Notes</a></li>
                                     @if (item.state == 1)
                                     {
                                         <li><a class="dropdown-item" href="#"><i class="fa-solid fa-notes-medical"></i> Assign Case</a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-notes-medical"></i> Cancel Case</a></li>
+                                        <li><a class="btn dropdown-item cancelpopup" data-bs-toggle="modal" data-bs-target="#cancelmodal"><i class="fa-solid fa-notes-medical"></i> Cancel Case</a></li>
                                         <li><a class="dropdown-item" href="#"><i class="fa-solid fa-ban"></i> Block Patient</a></li>
                                     }
                                     @if (item.state == 3)

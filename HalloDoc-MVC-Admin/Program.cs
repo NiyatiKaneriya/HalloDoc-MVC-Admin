@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>();
-builder.Services.AddScoped<IContactRepository, ConctactRepository>();
+
 builder.Services.AddScoped<IRequestRepository, RequestRepository>();
 var app = builder.Build();
 

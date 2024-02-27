@@ -3,7 +3,7 @@
 *@
 @{
 }
-@model HalloDoc_MVC_AdminDBEntity.ViewModels.ViewNotesModel
+@model List<HalloDoc_MVC_AdminDBEntity.ViewModels.ViewNotesModel>
 
 <section class="container-fluid w-75">
     <div class="row my-4 ">
@@ -22,6 +22,11 @@
                 <h2 class="text-center align-content-center"><i class="fa-solid fa-right-left"></i></h2>
                 <div class="ps-3">
                     <h5>Transfer Notes</h5>
+                    @foreach(var item in Model)
+                    {
+                        <p id="txtPhysicianNotes">@item.TransferNotes</p>
+                    }
+                    
                 </div>
             </div>
                        
@@ -31,7 +36,7 @@
                 <h2 class="text-center align-content-center"><i class="fa-solid fa-user-doctor"></i></h2>
                 <div class="ps-3">
                     <h5>Physician Notes</h5>
-                    <p class="notespara" id="txtPhysicianNotes">@Model.PhysicianNotes</p>
+                    <p class="notespara" id="txtPhysicianNotes">@Model[0].PhysicianNotes</p>
                 </div>
             </div>
             
@@ -41,14 +46,14 @@
                 <h2 class="text-center align-content-center"><i class="fa-solid fa-user-tie"></i></h2>
                 <div class="ps-3">
                     <h5>Admin Notes</h5>
-                    <p class="notespara text-start" id="txtAdminNotes">@Model.AdminNotes</p>
+                    <p class="notespara text-start" id="txtAdminNotes">@Model[0].AdminNotes</p>
                 </div>
             </div>
         </div>
        
         </div>
         <form asp-controller="Dashboard" asp-action="SaveViewNotes">
-            <input asp-for="Requestid" type=hidden/>
+            <input asp-for="@Model[0].Requestid" type=hidden/>
         <div class="col-12 mb-3">
             <div class="form-floating">
                 <textarea  class="form-control" id="notetext"

@@ -192,17 +192,38 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
             return true;
         }
 
-        public async Task<ViewNotesModel> GetViewNotes(int requestid)
+        public List<ViewNotesModel> GetViewNotes(int requestid)
         {
-            var query = await (from note in _context.RequestNotes
-                               where note.RequestId == requestid
-                               select new ViewNotesModel
-                               {
-                                   Requestid = note.RequestId,
-                                   AdminNotes =note.AdminNotes,
-                                   PhysicianNotes = note.PhysicianNotes,
-                                   
-                               }).FirstOrDefaultAsync();
+            //var query = await (from note in _context.RequestNotes
+            //                   where note.RequestId == requestid
+            //                   select new ViewNotesModel
+            //                   {
+            //                       Requestid = note.RequestId,
+            //                       AdminNotes =note.AdminNotes,
+            //                       PhysicianNotes = note.PhysicianNotes,
+
+            //                   }).FirstOrDefaultAsync();
+            var query = (from r in _context.RequestNotes
+                         join rs in _context.RequestStatusLogs on r.RequestId equals rs.RequestId into rsGroup
+                         from rs in rsGroup.DefaultIfEmpty()
+                         join p in _context.Physicians on rs.TransToPhysicianId equals p.PhysicianId into pGroup
+                         from p in pGroup.DefaultIfEmpty()
+                         join a in _context.Admins on rs.AdminId equals a.AdminId into aGroup
+                         from a in aGroup.DefaultIfEmpty()
+                         where r.RequestId == requestid
+                         select new ViewNotesModel
+                         {
+                             Requestid = r.RequestId,
+                             AdminNotes = r.AdminNotes,
+                             PhysicianNotes = r.PhysicianNotes,
+                             // Status = rs.Status,
+                             TransferDate = rs.CreatedDate,
+                             Notes = rs.Notes,
+                             Physician = p.FirstName,
+                             Admin = a.FirstName
+                         }).ToList();
+
+
             return query;
 
         }

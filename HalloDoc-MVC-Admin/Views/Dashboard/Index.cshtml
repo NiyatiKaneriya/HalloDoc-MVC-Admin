@@ -136,6 +136,7 @@
     <div id="data-table">
         
     </div>
+    <partial name="_CancelCase" />
 
 </section>
 @section scripts{
@@ -173,10 +174,7 @@
                 }
             });
         }
-    </script>
-
-    
-    <script>
+   
         $(document).ready(function () {
             
             $(".btn-state").click(function () {
@@ -186,11 +184,7 @@
                 $(this).addClass("active");
             });
         });
-
-    </script>
     
-
-    <script>
         document.addEventListener('click', function (e) {
             if (e.target.tagName === 'BUTTON') {
                 e.target.style.outline = 'none';
@@ -198,8 +192,7 @@
             }
         });
 
-    </script>
-    <script>
+    
         $(document).ready(function () {
             $("#search-input").on("input", function () {
                 var searchText = $(this).val().toLowerCase();
@@ -217,6 +210,16 @@
                 }
             });
         }
+   
+        var cancel = document.getElementsByClassName("cancelpopup")
+        for (var i = 0; i < cancel.length; i++) {
+            cancel[i].addEventListener("click", function () {
+                alert("hello");
+                const myModal = new bootstrap.Modal('#cancelmodal');
+                myModal.show();
+            })
+        }
+        
     </script>
 
 }

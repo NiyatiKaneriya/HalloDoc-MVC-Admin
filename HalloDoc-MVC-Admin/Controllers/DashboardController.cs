@@ -2,21 +2,22 @@
 using HalloDoc_MVC_AdminDBEntity.ViewModels;
 using HalloDoc_MVC_AdminRepositories.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 
 namespace HalloDoc_MVC_Admin.Controllers
 {
     public class DashboardController : Controller
     {
-        private readonly IContactRepository _contactRepository;
+        
         private readonly IRequestRepository _requestRepository;
-        public DashboardController(IContactRepository contactRepository,IRequestRepository requestRepository) {
-            _contactRepository = contactRepository;
+        public DashboardController(IRequestRepository requestRepository) {
+          
             _requestRepository = requestRepository;
             
         }
         public async Task<IActionResult> Index()
         {
-            //RequestClient s = await _contactRepository.niyati();
+            
             ViewBag.NewCount = await _requestRepository.NewCount();
             ViewBag.ActiveCount = await _requestRepository.ActiveCount();
             ViewBag.PendingCount = await _requestRepository.PendingCount();
@@ -44,19 +45,22 @@ namespace HalloDoc_MVC_Admin.Controllers
 
             return View("ViewCase");
         }
-        public async Task<IActionResult> ViewNotes(int requestid)
+        public ViewResult ViewNotes(int id)
         {
-            ViewNotesModel viewNotesModel = await _requestRepository.GetViewNotes(requestid);
+            List<ViewNotesModel> viewNotesModel = _requestRepository.GetViewNotes(id);
 
             return View("ViewNotes", viewNotesModel);
         }
-        public async Task<IActionResult> SaveViewNotes(int? Requestid, string? AdminNotes ,string PhysicianNotes)
+        public ViewResult SaveViewNotes(int? Requestid, string? AdminNotes ,string PhysicianNotes)
         {
-            await _requestRepository.SaveViewNotes(Requestid, AdminNotes);
-            ViewNotesModel viewNotesModel = await _requestRepository.GetViewNotes((int)Requestid);
+             _requestRepository.SaveViewNotes(Requestid, AdminNotes);
+            List<ViewNotesModel> viewNotesModel =  _requestRepository.GetViewNotes((int)Requestid);
 
-            return View("ViewNotes", viewNotesModel);
+            return View("ViewNotes", new { id = Requestid });
         }
-
+        public PartialViewResult Cancelpopup()
+        {
+            return PartialView("_cancelCase");
+        }
     }
 }
