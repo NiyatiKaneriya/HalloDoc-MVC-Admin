@@ -1,4 +1,6 @@
 ﻿<!-- Modal -->
+@model HalloDoc_MVC_AdminDBEntity.ViewModels.CancelCaseModel
+
 <div class="modal fade" id="cancelmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -7,29 +9,30 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form asp-controller="Dashboard" asp-action="CancelCase" method="post">
+                     
+                    <input id="cancelreq" name="RequestId" class="d-none" />
                     <div class="mb-3">
                         Patient Name : <span id="name" class="text-info fw-bold"></span>
                     </div>
                     <div class="mb-3">
-                        <select class="py-2 mt-3 form-control mb-3 w-100 " id="regionsearch">
-                            <option>reasons for cancellation</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
+                        <select class="form-select form-select-sm p-2"  data-allow-clear="true" tabindex="-1" id="reason" asp-for="ReasonId" onchange="captureSelectedReason()" asp-items="@(new SelectList(ViewBag.CaseTagComboBox,"CaseTagId","CaseTagName"))" data-control="select" data-placeholder="Cancel Reason">
+                            <option >All Case Reason</option>
+                        </select>   
+                        <input type="hidden" id="selectedReasonNameInput" asp-for="ReasonTag">
                     </div>
                     <div class="mb-3">
                         <label for="message-text" class="col-form-label">Provide Additional Notes</label>
-                        <textarea class="form-control" id="message-text"></textarea>
+                        <textarea asp-for="Notes"  class="form-control" id="message-text"></textarea>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
                 
-                <button type="button" class="btn btn-info text-light">Confirm</button>
+            @* </div>
+            <div class="modal-footer"> *@
+
+                    <input type="submit"  class="btn btn-info text-light" value="Confirm">
                 <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">Cancel</button>
+            @* </div> *@
+            </form>
             </div>
         </div>
     </div>

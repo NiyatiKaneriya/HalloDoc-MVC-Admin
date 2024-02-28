@@ -3,6 +3,7 @@ using HalloDoc_MVC_AdminDBEntity.Models;
 using HalloDoc_MVC_AdminDBEntity.ViewModels;
 using HalloDoc_MVC_AdminRepositories.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace HalloDoc_MVC_AdminRepositories.Repository
 {
-    public class RequestRepository: IRequestRepository
+    public class RequestRepository : IRequestRepository
     {
         private readonly ApplicationDbContext _context;
 
@@ -29,7 +30,7 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
         }
         public async Task<int> ActiveCount()
         {
-            var query = await _context.Requests.CountAsync(e => e.Status == 4 ||  e.Status == 5);
+            var query = await _context.Requests.CountAsync(e => e.Status == 4 || e.Status == 5);
             return query;
         }
         public async Task<int> PendingCount()
@@ -54,7 +55,7 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
         }
         public async Task<List<ViewDashboradList>> RequestTableAsync(int state, int requesttype)
         {
-             
+
             List<int> statusList = new List<int>();
             if (state == 5)
             {
@@ -84,69 +85,69 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
                 statusList.Add(9);
             }
             List<ViewDashboradList> query;
-            if(requesttype==0)
+            if (requesttype == 0)
             {
-                 query = (from r in _context.Requests
-                             join rc in _context.RequestClients on r.RequestId equals rc.RequestId
-                             join p in _context.Physicians on r.PhysicianId equals p.PhysicianId into physicianGroup
-                             from physician in physicianGroup.DefaultIfEmpty()
-                             join re in _context.Regions on rc.RegionId equals re.RegionId into regionGroup
-                             from region in regionGroup.DefaultIfEmpty()
-                             where statusList.Contains(r.Status)
-                          select new ViewDashboradList
-                             {
-                              RequestClientId = rc.RequestClientId,
-                                 RequestId = r.RequestId,
-                                 PatientF = rc.FirstName,
-                                 PatientL = rc.LastName,
-                                 Email = r.Email,
-                                 Status = r.Status,
-                                 DOB = new DateOnly((int)rc.IntYear, Convert.ToInt32(rc.StrMonth), (int)rc.IntDate),
-                                 RequestTypeId = r.RequestTypeId,
-                                 RequestorF = r.FirstName,
-                                 RequestorL = r.LastName,
-                                 RequestedDate = r.CreatedDate,
-                                 Phone = rc.PhoneNumber,
-                              PhoneO = r.PhoneNumber,
-                              PhysicianF = physician.FirstName,
-                                 PhysicianL = physician.LastName,
-                                 Address = rc.Address,
-                                 Notes = rc.Notes,
-                                 Region = region.Name
-                             }).ToList();
+                query = (from r in _context.Requests
+                         join rc in _context.RequestClients on r.RequestId equals rc.RequestId
+                         join p in _context.Physicians on r.PhysicianId equals p.PhysicianId into physicianGroup
+                         from physician in physicianGroup.DefaultIfEmpty()
+                         join re in _context.Regions on rc.RegionId equals re.RegionId into regionGroup
+                         from region in regionGroup.DefaultIfEmpty()
+                         where statusList.Contains(r.Status)
+                         select new ViewDashboradList
+                         {
+                             RequestClientId = rc.RequestClientId,
+                             RequestId = r.RequestId,
+                             PatientF = rc.FirstName,
+                             PatientL = rc.LastName,
+                             Email = r.Email,
+                             Status = r.Status,
+                             DOB = new DateOnly((int)rc.IntYear, Convert.ToInt32(rc.StrMonth), (int)rc.IntDate),
+                             RequestTypeId = r.RequestTypeId,
+                             RequestorF = r.FirstName,
+                             RequestorL = r.LastName,
+                             RequestedDate = r.CreatedDate,
+                             Phone = rc.PhoneNumber,
+                             PhoneO = r.PhoneNumber,
+                             PhysicianF = physician.FirstName,
+                             PhysicianL = physician.LastName,
+                             Address = rc.Address,
+                             Notes = rc.Notes,
+                             Region = region.Name
+                         }).ToList();
             }
             else
             {
-                 query = (from r in _context.Requests
-                             join rc in _context.RequestClients on r.RequestId equals rc.RequestId
-                             join p in _context.Physicians on r.PhysicianId equals p.PhysicianId into physicianGroup
-                             from physician in physicianGroup.DefaultIfEmpty()
-                             join re in _context.Regions on rc.RegionId equals re.RegionId into regionGroup
-                             from region in regionGroup.DefaultIfEmpty()
-                             where statusList.Contains(r.Status)  && r.RequestTypeId == requesttype
-                             select new ViewDashboradList
-                             {
-                                 RequestClientId = rc.RequestClientId,
-                                 RequestId = r.RequestId,
-                                 PatientF = rc.FirstName,
-                                 PatientL = rc.LastName,
-                                 Email = r.Email,
-                                 Status = r.Status,
-                                 DOB = new DateOnly((int)rc.IntYear, Convert.ToInt32(rc.StrMonth), (int)rc.IntDate),
-                                 RequestTypeId = r.RequestTypeId,
-                                 RequestorF = r.FirstName,
-                                 RequestorL = r.LastName,
-                                 RequestedDate = r.CreatedDate,
-                                 Phone = rc.PhoneNumber,
-                                 PhoneO = r.PhoneNumber,
-                                 PhysicianF = physician.FirstName,
-                                 PhysicianL = physician.LastName,
-                                 Address = rc.Address,
-                                 Notes = rc.Notes,
-                                 Region = region.Name
-                             }).ToList();
+                query = (from r in _context.Requests
+                         join rc in _context.RequestClients on r.RequestId equals rc.RequestId
+                         join p in _context.Physicians on r.PhysicianId equals p.PhysicianId into physicianGroup
+                         from physician in physicianGroup.DefaultIfEmpty()
+                         join re in _context.Regions on rc.RegionId equals re.RegionId into regionGroup
+                         from region in regionGroup.DefaultIfEmpty()
+                         where statusList.Contains(r.Status) && r.RequestTypeId == requesttype
+                         select new ViewDashboradList
+                         {
+                             RequestClientId = rc.RequestClientId,
+                             RequestId = r.RequestId,
+                             PatientF = rc.FirstName,
+                             PatientL = rc.LastName,
+                             Email = r.Email,
+                             Status = r.Status,
+                             DOB = new DateOnly((int)rc.IntYear, Convert.ToInt32(rc.StrMonth), (int)rc.IntDate),
+                             RequestTypeId = r.RequestTypeId,
+                             RequestorF = r.FirstName,
+                             RequestorL = r.LastName,
+                             RequestedDate = r.CreatedDate,
+                             Phone = rc.PhoneNumber,
+                             PhoneO = r.PhoneNumber,
+                             PhysicianF = physician.FirstName,
+                             PhysicianL = physician.LastName,
+                             Address = rc.Address,
+                             Notes = rc.Notes,
+                             Region = region.Name
+                         }).ToList();
             }
-            
+
 
             return (List<ViewDashboradList>)query;
         }
@@ -154,24 +155,24 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
         public async Task<ViewCaseModel> GetViewCase(int requestclientid)
         {
             var query = await (from r in _context.Requests
-                        join rc in _context.RequestClients on r.RequestId equals rc.RequestId
-                        join re in _context.Regions on rc.RegionId equals re.RegionId into regionGroup
-                        from region in regionGroup.DefaultIfEmpty()
-                        where rc.RequestClientId == requestclientid
-                        select new ViewCaseModel
-                        {
-                            RequestId = r.RequestId,
-                            PatientF = rc.FirstName,
-                            PatientL = rc.LastName,
-                            Email = r.Email,
-                            Status = r.Status,
-                            DOB = new DateOnly((int)rc.IntYear, Convert.ToInt32(rc.StrMonth), (int)rc.IntDate),
-                            Phone = rc.PhoneNumber,
-                            
-                            Address = rc.Address,
-                            Notes = rc.Notes,
-                            Region = region.Name
-                        }).FirstOrDefaultAsync() ;
+                               join rc in _context.RequestClients on r.RequestId equals rc.RequestId
+                               join re in _context.Regions on rc.RegionId equals re.RegionId into regionGroup
+                               from region in regionGroup.DefaultIfEmpty()
+                               where rc.RequestClientId == requestclientid
+                               select new ViewCaseModel
+                               {
+                                   RequestId = r.RequestId,
+                                   PatientF = rc.FirstName,
+                                   PatientL = rc.LastName,
+                                   Email = r.Email,
+                                   Status = r.Status,
+                                   DOB = new DateOnly((int)rc.IntYear, Convert.ToInt32(rc.StrMonth), (int)rc.IntDate),
+                                   Phone = rc.PhoneNumber,
+
+                                   Address = rc.Address,
+                                   Notes = rc.Notes,
+                                   Region = region.Name
+                               }).FirstOrDefaultAsync();
             return query;
 
         }
@@ -180,9 +181,9 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
         {
 
             var requestclient = await _context.RequestClients.Where(r => r.RequestClientId == viewCase.RequestClientId).FirstAsync();
-             
+
             requestclient.FirstName = viewCase.PatientF;
-                requestclient.LastName = viewCase.PatientL;
+            requestclient.LastName = viewCase.PatientL;
             requestclient.PhoneNumber = viewCase.Phone;
             requestclient.Address = viewCase.Address;
             //requestclient.Region = viewCase.Region;
@@ -194,15 +195,7 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
 
         public List<ViewNotesModel> GetViewNotes(int requestid)
         {
-            //var query = await (from note in _context.RequestNotes
-            //                   where note.RequestId == requestid
-            //                   select new ViewNotesModel
-            //                   {
-            //                       Requestid = note.RequestId,
-            //                       AdminNotes =note.AdminNotes,
-            //                       PhysicianNotes = note.PhysicianNotes,
-
-            //                   }).FirstOrDefaultAsync();
+            
             var query = (from r in _context.RequestNotes
                          join rs in _context.RequestStatusLogs on r.RequestId equals rs.RequestId into rsGroup
                          from rs in rsGroup.DefaultIfEmpty()
@@ -239,5 +232,42 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
 
             return true;
         }
+        public async Task<Boolean> CancelCase(int RequestId, CancelCaseModel cancelCaseModel)
+        {
+            var req = await _context.Requests.Where(e => e.RequestId == cancelCaseModel.Requestid).FirstAsync();
+            if (req != null)
+            {
+                req.CaseTag = cancelCaseModel.ReasonTag;
+                req.Status = 3;
+                _context.Requests.Update(req);
+                _context.SaveChanges();
+
+                RequestStatusLog requestStatusLog = new RequestStatusLog
+                {
+                    RequestId = cancelCaseModel.Requestid,
+                    Status = 3,
+                    AdminId = cancelCaseModel.AdminId,
+                    Notes = cancelCaseModel?.Notes,
+                    CreatedDate= DateTime.Now,
+                };
+
+                _context.RequestStatusLogs.Add(requestStatusLog);
+                _context.SaveChanges();
+
+
+                return true;
+            }
+            return false;
+        }
+        public async Task<List<CaseTagComboBox>> CaseTagComboBox()
+        {
+            return await _context.CaseTags.Select(req => new CaseTagComboBox()
+            {
+                CaseTagId = req.CaseTagId,
+                CaseTagName = req.Name,
+            }).ToListAsync();
+
+        }
+        
     }
-}
+ }

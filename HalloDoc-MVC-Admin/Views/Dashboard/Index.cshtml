@@ -211,25 +211,43 @@
             });
         }
 
-        const exampleModal = document.getElementById('cancelmodal')
-        if (exampleModal) {
-            exampleModal.addEventListener('show.bs.modal', event => {
+        
+        const cancelmodal = document.getElementById('cancelmodal')
+        if (cancelmodal) {
+            cancelmodal.addEventListener('show.bs.modal', event => {
                 // Button that triggered the modal
+                debugger
                 const button = event.relatedTarget
                 // Extract info from data-bs-* attributes
-                const recipient = button.getAttribute('data-bs-patientname')
+                const patient = button.getAttribute('data-bs-patientname')
+                const requestid = button.getAttribute('data-bs-requestid')
                 // If necessary, you could initiate an Ajax request here
                 // and then do the updating in a callback.
 
                 // Update the modal's content.
-                
-                const modalBodyname = cancelmodal.querySelector('.modal-body #name')
+
+                const name = cancelmodal.querySelector('.modal-body #name')
+                document.getElementById('cancelreq').value = requestid;
 
                 //modalTitle.textContent = `New message to ${recipient}`
-                modalBodyname.textContent = recipient
+                name.textContent = patient
             })
         }
+
         
+        function captureSelectedReason() {
+            // Retrieve the select element
+            var selectElement = document.getElementById("reason");
+
+            // Get the selected option
+            var selectedOption = selectElement.options[selectElement.selectedIndex];
+
+            // Retrieve the text of the selected option (CaseTagName)
+            var selectedReasonName = selectedOption.text;
+
+            // Update the value of the hidden input field with the selected reason name
+            document.getElementById("selectedReasonNameInput").value = selectedReasonName;
+        }
     </script>
 
 }

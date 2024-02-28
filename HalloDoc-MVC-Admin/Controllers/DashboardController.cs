@@ -24,7 +24,8 @@ namespace HalloDoc_MVC_Admin.Controllers
             ViewBag.ConcludeCount = await _requestRepository.ConcludeCount();
             ViewBag.ToCloseCount = await _requestRepository.ToCloseCount();
             ViewBag.UnpaidCount = await _requestRepository.UnpaidCount();
-            
+            ViewBag.CaseTagCombobox = await _requestRepository.CaseTagComboBox();
+
             return View();
         }
         public async Task<IActionResult> GetRequestTable(int state,int requesttype)
@@ -58,9 +59,17 @@ namespace HalloDoc_MVC_Admin.Controllers
 
             return View("ViewNotes", new { id = Requestid });
         }
-        public PartialViewResult Cancelpopup()
+        //public PartialViewResult Cancelpopup()
+        //{
+        //    return PartialView("_cancelCase");
+        //}
+
+        public async Task<IActionResult> CancelCase(int requestid, CancelCaseModel cancelCaseModel)
         {
-            return PartialView("_cancelCase");
+            //ViewBag.CaseTagCombobox = await _requestRepository.CaseTagComboBox();
+            await _requestRepository.CancelCase(requestid, cancelCaseModel);
+            return RedirectToAction("Index");
+
         }
     }
 }
