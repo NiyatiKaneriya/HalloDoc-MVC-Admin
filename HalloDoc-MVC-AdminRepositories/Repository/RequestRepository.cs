@@ -213,9 +213,14 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
                              TransferDate = rs.CreatedDate,
                              Notes = rs.Notes,
                              Physician = p.FirstName,
-                             Admin = a.FirstName
+                             Admin = a.FirstName,
+                             
                          }).ToList();
-
+            
+            if(query.Count <= 0)
+            {
+                query.Add(new ViewNotesModel { Requestid = requestid, AdminNotes = "-", PhysicianNotes = "-" });
+            }
 
             return query;
 
