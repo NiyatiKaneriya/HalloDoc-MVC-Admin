@@ -417,6 +417,10 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
                 RegionAbbr = req.Abbreviation,
             }).ToListAsync();
         }
+        public IEnumerable<RegionModel> GetRegions()
+        {
+            return _context.Regions.ToList();
+        }
 
     }
 }

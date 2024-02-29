@@ -94,13 +94,7 @@
             </div>
             <div class="col-sm-6">
                 <div class="">
-                    @* <select class="p-2 mt-3 px-4 form-control mb-3 w-100 " id="regionsearch">
-                        <option>All Region</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select> *@
+                    
                     <select class="form-select form-select-sm p-2 mt-3 mb-3 w-100" data-allow-clear="true" tabindex="-1" id="region" onchange="captureSelectedRegion()" asp-items="@(new SelectList(ViewBag.RegionComboBox, "RegionId", "RegionName"))" data-control="select" data-placeholder="Region">
                         <option id="defaultregion" value="">Regions</option>
                     </select>

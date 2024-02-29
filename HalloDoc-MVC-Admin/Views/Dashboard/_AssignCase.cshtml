@@ -3,6 +3,7 @@
 *@
 @{
 }
+@model HalloDoc_MVC_AdminDBEntity.ViewModels.AssignCaseModel
 
 <div class="modal fade" id="assignmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -18,24 +19,19 @@
                         To assign the request search and select the physician.
                     </div>
                     <div class="mb-3">
-                        @* <select name="" class="py-2 mt-3 form-control mb-4 w-100 " id="assignregion">
-                            <option id="defaultregion" value="" selected disabled hidden>Select Region</option>
-                            @{
-                                // foreach (var item in @Model.regions)
-                                // {
-                                   // <option id="@item.Name" value="">@item.Name</option>
-                                //}
-                            }
-                        </select> *@
                         
-                        <select class="form-select form-select-sm mt-3 p-2" required data-allow-clear="true" tabindex="-1" onchange="myFunction()" id="region2" asp-items="@(new SelectList(ViewBag.RegionComboBox,"RegionId","RegionName"))" data-control="select2" data-placeholder="Select Level">
+                        
+                        <select class="form-select form-select-sm mt-3 p-2" required data-allow-clear="true" tabindex="-1" id="region2" asp-for="RegionId" asp-items="@(new SelectList(ViewBag.RegionComboBox,"RegionId","RegionName"))" data-control="select2" data-placeholder="Select Level">
                             <option>All Region</option>
                         </select>
 
                     </div>
                     <div class="mb-3">
-                        <select name="" class="py-2 mt-3 form-control mb-3 w-100 " id="">
+                        @* <select name="" class="py-2 mt-3 form-control mb-3 w-100 " id="">
                             <option id="defaultphysician" value="" selected disabled hidden>Select Physician</option>
+                        </select> *@
+                        <select class="form-select form-select-sm mt-3 p-2" required data-allow-clear="true" tabindex="-1" id="Provider" asp-for="PhysicianId" asp-items="@(new SelectList(ViewBag.RegionComboBox,"RegionId","RegionName"))" data-control="select2" data-placeholder="Select Level">
+                            <option>Physician</option>
                         </select>
                     </div>
                     <div class="mb-3">
