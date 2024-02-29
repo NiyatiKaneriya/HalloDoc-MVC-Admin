@@ -94,12 +94,15 @@
             </div>
             <div class="col-sm-6">
                 <div class="">
-                    <select class="p-2 mt-3 px-4 form-control mb-3 w-100 " id="regionsearch">
+                    @* <select class="p-2 mt-3 px-4 form-control mb-3 w-100 " id="regionsearch">
                         <option>All Region</option>
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
                         <option>5</option>
+                    </select> *@
+                    <select class="form-select form-select-sm p-2 mt-3 mb-3 w-100" data-allow-clear="true" tabindex="-1" id="region" onchange="captureSelectedRegion()" asp-items="@(new SelectList(ViewBag.RegionComboBox, "RegionId", "RegionName"))" data-control="select" data-placeholder="Region">
+                        <option id="defaultregion" value="">Regions</option>
                     </select>
                 </div>
             </div>
@@ -137,6 +140,7 @@
         
     </div>
     <partial name="_CancelCase" />
+    <partial name="_AssignCase" />
 
 </section>
 @section scripts{
@@ -235,19 +239,32 @@
         }
 
         
-        function captureSelectedReason() {
-            // Retrieve the select element
-            var selectElement = document.getElementById("reason");
+        // function captureSelectedReason() {
+        //     // Retrieve the select element
+        //     var selectElement = document.getElementById("reason");
+            
+        //     // Get the selected option
+        //     var selectedOption = selectElement.options[selectElement.selectedIndex];
 
-            // Get the selected option
-            var selectedOption = selectElement.options[selectElement.selectedIndex];
+        //     // Retrieve the text of the selected option (CaseTagName)
+        //     var selectedReasonName = selectedOption.text;
 
-            // Retrieve the text of the selected option (CaseTagName)
-            var selectedReasonName = selectedOption.text;
+        //     // Update the value of the hidden input field with the selected reason name
+        //     document.getElementById("selectedReasonNameInput").value = selectedReasonName;
+        // }
+        // function captureSelectedRegion() {
+        //     // Retrieve the select element
+        //     var selectElement = document.getElementById("region");
 
-            // Update the value of the hidden input field with the selected reason name
-            document.getElementById("selectedReasonNameInput").value = selectedReasonName;
-        }
+        //     // Get the selected option
+        //     var selectedOption = selectElement.options[selectElement.selectedIndex];
+
+        //     // Retrieve the text of the selected option (CaseTagName)
+        //     var selectedRegionName = selectedOption.text;
+
+        //     // Update the value of the hidden input field with the selected reason name
+        //     document.getElementById("selectedRegionNameInput").value = selectedRegionName;
+        // }
     </script>
 
 }

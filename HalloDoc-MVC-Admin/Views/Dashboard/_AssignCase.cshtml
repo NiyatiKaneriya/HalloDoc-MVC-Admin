@@ -1,0 +1,56 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="modal fade" id="assignmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h1 class="modal-title text-light  fs-5" id="exampleModalLabel">Assign Request</h1>
+                <button type="button" class="btn-close btn-light" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-controller="AdminDashboard" asp-action="">
+                    <input name="requestid" id="assignreqid" class="d-none" />
+                    <div class="mb-3">
+                        To assign the request search and select the physician.
+                    </div>
+                    <div class="mb-3">
+                        @* <select name="" class="py-2 mt-3 form-control mb-4 w-100 " id="assignregion">
+                            <option id="defaultregion" value="" selected disabled hidden>Select Region</option>
+                            @{
+                                // foreach (var item in @Model.regions)
+                                // {
+                                   // <option id="@item.Name" value="">@item.Name</option>
+                                //}
+                            }
+                        </select> *@
+                        
+                        <select class="form-select form-select-sm mt-3 p-2" required data-allow-clear="true" tabindex="-1" onchange="myFunction()" id="region2" asp-items="@(new SelectList(ViewBag.RegionComboBox,"RegionId","RegionName"))" data-control="select2" data-placeholder="Select Level">
+                            <option>All Region</option>
+                        </select>
+
+                    </div>
+                    <div class="mb-3">
+                        <select name="" class="py-2 mt-3 form-control mb-3 w-100 " id="">
+                            <option id="defaultphysician" value="" selected disabled hidden>Select Physician</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Description</label>
+                        <textarea name="canceladditional" class="form-control" id="message-text" style="height: 100px"></textarea>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-info text-light">Confirm</button>
+                        <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace HalloDoc_MVC_AdminDBEntity.ViewModels
 {
-    public class CaseTagComboBox
+    public class RegionComboBox
     {
-        public int CaseTagId { get; set; }
-        public string CaseTagName { get; set; }
+        public int RegionId { get; set; }
+        public string RegionName { get; set; }
+        public string RegionAbbr { get; set; }
     }
-    
 }

@@ -16,10 +16,10 @@
                         Patient Name : <span id="name" class="text-info fw-bold"></span>
                     </div>
                     <div class="mb-3">
-                        <select class="form-select form-select-sm p-2"  data-allow-clear="true" tabindex="-1" id="reason" asp-for="ReasonId" onchange="captureSelectedReason()" asp-items="@(new SelectList(ViewBag.CaseTagComboBox,"CaseTagId","CaseTagName"))" data-control="select" data-placeholder="Cancel Reason">
-                            <option >All Case Reason</option>
+                        <select class="form-select form-select-sm p-2"  data-allow-clear="true" tabindex="-1" id="reason" asp-for="ReasonTag" onchange="captureSelectedReason()" asp-items="@(new SelectList(ViewBag.CaseTagComboBox,"CaseTagId","CaseTagName"))" data-control="select" data-placeholder="Cancel Reason">
+                            <option id="defaultreason" value=""   >Reasons for Cancellation</option>
                         </select>   
-                        <input type="hidden" id="selectedReasonNameInput" asp-for="ReasonTag">
+                       
                     </div>
                     <div class="mb-3">
                         <label for="message-text" class="col-form-label">Provide Additional Notes</label>

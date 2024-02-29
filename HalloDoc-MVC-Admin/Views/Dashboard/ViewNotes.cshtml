@@ -3,7 +3,7 @@
 *@
 @{
 }
-@model List<HalloDoc_MVC_AdminDBEntity.ViewModels.ViewNotesModel>
+@model HalloDoc_MVC_AdminDBEntity.ViewModels.ViewNotesModel
 
 <section class="container-fluid w-75">
     <div class="row my-4 ">
@@ -22,9 +22,14 @@
                 <h2 class="text-center align-content-center"><i class="fa-solid fa-right-left"></i></h2>
                 <div class="ps-3">
                     <h5>Transfer Notes</h5>
-                    @foreach(var item in Model)
+                    @foreach(var item in Model.TransferNotes)
                     {
-                        <p id="txtPhysicianNotes">@item.TransferNotes</p>
+                        <p id="txtTransferNotes">@item.Notes</p>
+                        @* if(@item.Admin != null && @item.Physician != null && item.Status != 3)
+                        {
+                            <p id="txtTransferNotes">@item.TransferNotes</p>
+                        } *@
+                       
                     }
                     
                 </div>
@@ -36,7 +41,7 @@
                 <h2 class="text-center align-content-center"><i class="fa-solid fa-user-doctor"></i></h2>
                 <div class="ps-3">
                     <h5>Physician Notes</h5>
-                    <p class="notespara" id="txtPhysicianNotes">@Model[0].PhysicianNotes</p>
+                    <p class="notespara" id="txtPhysicianNotes">@Model.PhysicianNotes</p>
                 </div>
             </div>
             
@@ -46,14 +51,32 @@
                 <h2 class="text-center align-content-center"><i class="fa-solid fa-user-tie"></i></h2>
                 <div class="ps-3">
                     <h5>Admin Notes</h5>
-                    <p class="notespara text-start" id="txtAdminNotes">@Model[0].AdminNotes</p>
+                    <p class="notespara text-start" id="txtAdminNotes">@Model.AdminNotes</p>
                 </div>
             </div>
         </div>
+        @* <div class="col-6 p-2">
+            <div class="btn notebtn d-flex border border-1 rounded " id="cancelbtn">
+                <h2 class="text-center align-content-center"><i class="fa-solid fa-right-left"></i></h2>
+                <div class="ps-3">
+                    <h5>Cancellation Notes</h5>
+                    @foreach (var item in Model)
+                    {
+                        if (item.Status == 3)
+                        {
+                            <p id="txtCancelNotes">@item.Notes</p>
+                        }
+
+                    }
+
+                </div>
+            </div>
+
+        </div> *@
        
         </div>
-        <form asp-controller="Dashboard" asp-action="SaveViewNotes">
-            <input asp-for="@Model[0].Requestid" type=hidden/>
+    <form method="post" asp-controller="Dashboard" asp-action="SaveViewNotes" asp-route-requestid="@Model.Requestid">
+            <input asp-for="@Model.Requestid" hidden/>
         <div class="col-12 mb-3">
             <div class="form-floating">
                 <textarea  class="form-control" id="notetext"
@@ -62,8 +85,8 @@
             </div>
         </div>
         <div class="col-12 d-flex flex-row-reverse">
-            <input class="btn btn-info" type="submit" value="Save Changes">              
-            
+            <input class="btn btn-info"  type="submit" >
+
         </div>
         </form>
         
@@ -87,6 +110,16 @@
                 $("#notetext").val(s);
                 $("#notetext").attr("name","PhysicianNotes");
                 $("#note").text( "Physician Notes");
+                $("#notetext").attr("disabled","true");
+            });
+
+            
+
+            $("#cancelbtn").click(function () {
+                var s = $("#txtCancelNotes").html();
+                $("#notetext").val(s);
+                $("#notetext").attr("name","Notes");
+                $("#note").text("Cancellation Notes");
                 $("#notetext").attr("disabled","true");
             });
         });

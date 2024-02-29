@@ -25,6 +25,7 @@ namespace HalloDoc_MVC_Admin.Controllers
             ViewBag.ToCloseCount = await _requestRepository.ToCloseCount();
             ViewBag.UnpaidCount = await _requestRepository.UnpaidCount();
             ViewBag.CaseTagCombobox = await _requestRepository.CaseTagComboBox();
+            ViewBag.RegionCombobox = await _requestRepository.RegionComboBox();
 
             return View();
         }
@@ -46,27 +47,27 @@ namespace HalloDoc_MVC_Admin.Controllers
 
             return View("ViewCase");
         }
-        public ViewResult ViewNotes(int id)
+        public async Task<IActionResult> ViewNotes(int id)
         {
-            List<ViewNotesModel> viewNotesModel = _requestRepository.GetViewNotes(id);
+            ViewNotesModel viewNotesModel = await _requestRepository.GetViewNotes(id);
 
             return View("ViewNotes", viewNotesModel);
         }
-        public ViewResult SaveViewNotes(int? Requestid, string? AdminNotes ,string PhysicianNotes)
+        public async Task<IActionResult> SaveViewNotes(int? Requestid, string? AdminNotes, string? PhysicianNotes)
         {
-             _requestRepository.SaveViewNotes(Requestid, AdminNotes);
-            List<ViewNotesModel> viewNotesModel =  _requestRepository.GetViewNotes((int)Requestid);
 
-            return View("ViewNotes", new { id = Requestid });
+            await _requestRepository.SaveViewNotes(Requestid, AdminNotes , PhysicianNotes);
+            //ViewNotes((int)Requestid);
+            //List<ViewNotesModel> viewNotesModel =  _requestRepository.GetViewNotes((int)Requestid);
+            
+                return RedirectToAction("ViewNotes", new { id = Requestid });
+               
+            
         }
-        //public PartialViewResult Cancelpopup()
-        //{
-        //    return PartialView("_cancelCase");
-        //}
-
+      
         public async Task<IActionResult> CancelCase(int requestid, CancelCaseModel cancelCaseModel)
         {
-            //ViewBag.CaseTagCombobox = await _requestRepository.CaseTagComboBox();
+            
             await _requestRepository.CancelCase(requestid, cancelCaseModel);
             return RedirectToAction("Index");
 

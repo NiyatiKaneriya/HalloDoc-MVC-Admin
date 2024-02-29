@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static HalloDoc_MVC_AdminDBEntity.ViewModels.ViewNotesModel;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace HalloDoc_MVC_AdminRepositories.Repository
@@ -193,49 +194,184 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
             return true;
         }
 
-        public List<ViewNotesModel> GetViewNotes(int requestid)
+        public async Task<ViewNotesModel> GetViewNotes(int requestid)
         {
-            
-            var query = (from r in _context.RequestNotes
-                         join rs in _context.RequestStatusLogs on r.RequestId equals rs.RequestId into rsGroup
-                         from rs in rsGroup.DefaultIfEmpty()
-                         join p in _context.Physicians on rs.TransToPhysicianId equals p.PhysicianId into pGroup
-                         from p in pGroup.DefaultIfEmpty()
-                         join a in _context.Admins on rs.AdminId equals a.AdminId into aGroup
-                         from a in aGroup.DefaultIfEmpty()
-                         where r.RequestId == requestid
-                         select new ViewNotesModel
-                         {
-                             Requestid = r.RequestId,
-                             AdminNotes = r.AdminNotes,
-                             PhysicianNotes = r.PhysicianNotes,
-                             // Status = rs.Status,
-                             TransferDate = rs.CreatedDate,
-                             Notes = rs.Notes,
-                             Physician = p.FirstName,
-                             Admin = a.FirstName,
-                             
-                         }).ToList();
-            
-            if(query.Count <= 0)
+            try
             {
-                query.Add(new ViewNotesModel { Requestid = requestid, AdminNotes = "-", PhysicianNotes = "-" });
+                ViewNotesModel? notes = await _context.RequestNotes
+                    .Where(r => r.RequestId == requestid)
+                    .Select(r => new ViewNotesModel
+                    {
+                        Requestid = r.RequestId,
+                        AdministrativeNotes = r.AdministrativeNotes,
+                        AdminNotes = r.AdminNotes,
+                        CreatedBy = r.CreatedBy,
+                        CreatedDate = r.CreatedDate,
+                        //Intdate = r.Intdate,
+                        //Intyear = r.Intyear,
+                        //Ip = r.Ip,
+                        ModifiedBy = r.ModifiedBy,
+                        ModifiedDate = r.ModifiedDate,
+                        PhysicianNotes = r.PhysicianNotes,
+                        RequestNotesId = r.RequestNotesId,
+                    })
+                    .FirstOrDefaultAsync();
+
+               
+                    var requestlog = await _context.RequestStatusLogs
+                        .Where(E => E.RequestId == requestid && E.TransToPhysician != null)
+                    .ToListAsync();
+                if (requestlog.Count <= 0 && notes == null)
+                {
+                    notes = new ViewNotesModel();
+                    notes.Requestid = requestid;
+                    notes.PhysicianNotes = "--";
+                    notes.AdministrativeNotes = "--";
+                    notes.AdminNotes = "--";
+                }
+                List<TransferNotesModel> transferlist = requestlog.Select(e => new TransferNotesModel
+                    {
+                        RequestId = e.RequestId,
+                        Notes = e.Notes,
+                        PhysicianId = e.PhysicianId,
+                        CreatedDate = e.CreatedDate,
+                        RequestStatusLogId = e.RequestStatusLogId,
+                        TranstoAdmin = e.TransToAdmin,
+                        TranstoPhysicianId = e.TransToPhysicianId
+                    }).ToList();
+
+                    notes.TransferNotes = transferlist;
+                
+                return notes;
+            }
+            catch (Exception e)
+            {
+                throw; 
             }
 
-            return query;
+            //var query = (from rs in _context.RequestStatusLogs
+            //             join r in _context.RequestNotes on rs.RequestId equals r.RequestId into rGroup
+            //             from r
+            //             join p in _context.Physicians on rs.TransToPhysicianId equals p.PhysicianId into pGroup
+            //             from p in pGroup.DefaultIfEmpty()
+            //             join a in _context.Admins on rs.AdminId equals a.AdminId into aGroup
+            //             from a in aGroup.DefaultIfEmpty()
+            //             where rs.RequestId == requestid
+            //             select new ViewNotesModel
+            //             {
+            //                 Requestid = rs.RequestId,
+            //                 AdminNotes = r.AdminNotes,
+            //                 PhysicianNotes = r.PhysicianNotes,
+            //                 Status = rs.Status,
+            //                 TransferDate = rs.CreatedDate,
+            //                 Notes = rs.Notes,
+            //                 Physician = p.FirstName,
+            //                 Admin = a.FirstName,
+
+
+            //             }).ToList();
+
+            //if(query.Count <= 0)
+            //{
+            //    query.Add(new ViewNotesModel { Requestid = requestid, AdminNotes = "-", PhysicianNotes = "-" });
+            //}
+
+            //return query;
 
         }
-        public async Task<Boolean> SaveViewNotes(int? Requestid, string? AdminNotes)
+        public async Task<Boolean> SaveViewNotes(int? Requestid, string? AdminNotes, string? PhysicianNotes)
         {
+            try
+            {
+                RequestNote notes =  _context.RequestNotes.FirstOrDefault(E => E.RequestId == Requestid);
+                if (PhysicianNotes != null)
+                {
+                    if (notes != null)
+                    {
 
-            var request = await _context.RequestNotes.Where(r => r.RequestId == Requestid).FirstAsync();
+                        notes.PhysicianNotes = PhysicianNotes;
+                        notes.ModifiedDate = DateTime.Now;
 
-            //request.PhysicianNotes = PhysicianNotes;          
-            request.AdminNotes = AdminNotes;
-            _context.RequestNotes.Update(request);
-            await _context.SaveChangesAsync();
+                        _context.RequestNotes.Update(notes);
+                        await _context.SaveChangesAsync();
+                        return true;
+                    }
+                    else
 
-            return true;
+                    {
+                        RequestNote rn = new RequestNote
+                        {
+                            RequestId = (int)Requestid,
+                            PhysicianNotes = PhysicianNotes,
+                            CreatedDate = DateTime.Now,
+                            CreatedBy = "5df80732-5198-4c87-b1ea-ebf86cbd7530"
+                        };
+                        _context.RequestNotes.Add(rn);
+                        await _context.SaveChangesAsync();
+                        return true;
+                    }
+                }
+                else if (AdminNotes != null)
+                {
+                    if (notes != null)
+                    {
+
+                        notes.AdminNotes = AdminNotes;
+                        notes.ModifiedDate = DateTime.Now;
+
+                        _context.RequestNotes.Update(notes);
+                        await _context.SaveChangesAsync();
+                        return true;
+                    }
+                    else
+                    {
+                        RequestNote rn = new RequestNote
+                        {
+                            RequestId = (int)Requestid,
+                            AdminNotes = AdminNotes,
+                            CreatedDate = DateTime.Now,
+                            CreatedBy = "5df80732-5198-4c87-b1ea-ebf86cbd7530"
+                        };
+                        _context.RequestNotes.Add(rn);
+                        await _context.SaveChangesAsync();
+                        return true;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            //var  request = await _context.RequestNotes.Where(r => r.RequestId == Requestid).FirstOrDefaultAsync();
+            //if(request == null)
+            //{
+            //    RequestNote requestNotes = new RequestNote
+            //    {
+            //        RequestId = (int)Requestid,
+            //        AdminNotes = AdminNotes,
+            //        CreatedDate = DateTime.Now,
+            //        CreatedBy = "5df80732-5198-4c87-b1ea-ebf86cbd7530"
+            //    };
+
+            //    _context.RequestNotes.Add(requestNotes);
+            //   await _context.SaveChangesAsync();
+            //    return true;
+
+            //}
+            //else
+            //{
+            //    request.AdminNotes = AdminNotes;
+            //    _context.RequestNotes.Update(request);
+            //    await _context.SaveChangesAsync();
+            //    return true;
+            //}
+
+            //return false;
         }
         public async Task<Boolean> CancelCase(int RequestId, CancelCaseModel cancelCaseModel)
         {
@@ -259,7 +395,6 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
                 _context.RequestStatusLogs.Add(requestStatusLog);
                 _context.SaveChanges();
 
-
                 return true;
             }
             return false;
@@ -273,6 +408,15 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
             }).ToListAsync();
 
         }
-        
+        public async Task<List<RegionComboBox>> RegionComboBox()
+        {
+            return await _context.Regions.Select(req => new RegionComboBox()
+            {
+                RegionId = req.RegionId,
+                RegionName = req.Name,
+                RegionAbbr = req.Abbreviation,
+            }).ToListAsync();
+        }
+
     }
- }
+}

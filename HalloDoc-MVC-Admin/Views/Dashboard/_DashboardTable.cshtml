@@ -131,7 +131,7 @@
                                     <li><a class="dropdown-item" asp-controller="Dashboard" asp-route-id="@item.RequestId" asp-action="ViewNotes"><i class="fa-solid fa-notes-medical"></i> View Notes</a></li>
                                     @if (item.state == 1)
                                     {
-                                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-notes-medical"></i> Assign Case</a></li>
+                                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#assignmodal" data-bs-requestid="@item.RequestId" data-bs-patientname="@item.Patient"><i class="fa-solid fa-notes-medical"></i> Assign Case</a></li>
                                         <li><a class="btn dropdown-item cancelpopup" data-bs-toggle="modal" data-bs-target="#cancelmodal" data-bs-requestid="@item.RequestId" data-bs-patientname="@item.Patient"><i class="fa-solid fa-notes-medical"></i> Cancel Case</a></li>
                                         <li><a class="dropdown-item" href="#"><i class="fa-solid fa-ban"></i> Block Patient</a></li>
                                     }

@@ -18,10 +18,12 @@ namespace HalloDoc_MVC_AdminRepositories.Repository.Interface
         public  Task<List<ViewDashboradList>> RequestTableAsync(int state,int requesttype);
         public Task<ViewCaseModel> GetViewCase(int requestclientid);
         public Task<Boolean> SaveViewCase(ViewCaseModel viewCase);
-        public List<ViewNotesModel> GetViewNotes(int requestid);
-        public Task<Boolean> SaveViewNotes(  int? Requestid, string? AdminNotes);
+        public Task<ViewNotesModel> GetViewNotes(int requestid);
+        public Task<Boolean> SaveViewNotes(int? Requestid, string? AdminNotes, string? PhysicianNotes);
         public Task<Boolean> CancelCase(int RequestId, CancelCaseModel cancelCaseModel);
         public Task<List<CaseTagComboBox>> CaseTagComboBox();
+        public Task<List<RegionComboBox>> RegionComboBox();
+
 
     }
 }
