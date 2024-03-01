@@ -3,6 +3,7 @@ using HalloDoc_MVC_AdminDBEntity.ViewModels;
 using HalloDoc_MVC_AdminRepositories.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HalloDoc_MVC_Admin.Controllers
 {
@@ -26,6 +27,11 @@ namespace HalloDoc_MVC_Admin.Controllers
             ViewBag.UnpaidCount = await _requestRepository.UnpaidCount();
             ViewBag.CaseTagCombobox = await _requestRepository.CaseTagComboBox();
             ViewBag.RegionCombobox = await _requestRepository.RegionComboBox();
+            var Regions = _requestRepository.GetRegions();
+            ViewBag.Regions = new SelectList(Regions, "RegionId", "RegionName");
+
+
+            ViewBag.PhysiciansByRegion = new SelectList(Enumerable.Empty<SelectListItem>());
 
             return View();
         }
@@ -69,6 +75,28 @@ namespace HalloDoc_MVC_Admin.Controllers
         {
             
             await _requestRepository.CancelCase(requestid, cancelCaseModel);
+            return RedirectToAction("Index");
+
+        }
+        public IActionResult GetPhysicianByRegion(int regionid)
+        {
+            var PhysiciansByRegion = _requestRepository.GetPhysicianByRegion(regionid);
+            
+            return Json(PhysiciansByRegion);
+        }
+        public async Task<IActionResult> SaveAssignCase(int RequestId, AssignCaseModel assignCaseModel)
+        {
+
+            await _requestRepository.SaveAssignCase(RequestId, assignCaseModel);
+
+            return RedirectToAction("Index");
+
+        }
+        public async Task<IActionResult> BlockCase(int RequestId, CancelCaseModel cancelCaseModel)
+        {
+
+            await _requestRepository.BlockCase(RequestId, cancelCaseModel);
+
             return RedirectToAction("Index");
 
         }

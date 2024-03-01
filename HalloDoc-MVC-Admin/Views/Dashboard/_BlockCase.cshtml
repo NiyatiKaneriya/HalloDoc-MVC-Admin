@@ -1,0 +1,55 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!-- Modal -->
+@model HalloDoc_MVC_AdminDBEntity.ViewModels.CancelCaseModel
+
+<div class="modal fade" id="blockmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h1 class="modal-title text-light  fs-5" id="exampleModalLabel">Confirm Block</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-controller="Dashboard" asp-action="BlockCase" method="post">
+
+                    <input id="blockreq" name="RequestId" hidden />
+                    <div class="mb-3">
+                        Patient Name : <span id="name" class="text-info fw-bold"></span>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Reason for Block Request</label>
+                        <textarea asp-for="Notes" class="form-control" id="message-text"></textarea>
+                    </div>
+                    <input type="submit" class="btn btn-info text-light" value="Confirm">
+                    <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">Cancel</button>
+                  
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const blockmodal = document.getElementById('blockmodal')
+    if (blockmodal) {
+        blockmodal.addEventListener('show.bs.modal', event => {
+            // Button that triggered the modal
+            const button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            const patient = button.getAttribute('data-bs-patientname')
+            const requestid = button.getAttribute('data-bs-requestid')
+            // If necessary, you could initiate an Ajax request here
+            // and then do the updating in a callback.
+            // Update the modal's content.
+            const name = blockmodal.querySelector('.modal-body #name')
+            document.getElementById('blockreq').value = requestid;
+            //modalTitle.textContent = `New message to ${recipient}`
+            name.textContent = patient
+        })
+    }
+</script>

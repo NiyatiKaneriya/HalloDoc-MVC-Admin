@@ -1,4 +1,6 @@
-﻿using HalloDoc_MVC_AdminDBEntity.ViewModels;
+﻿using HalloDoc_MVC_AdminDBEntity.Models;
+using HalloDoc_MVC_AdminDBEntity.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,13 @@ namespace HalloDoc_MVC_AdminRepositories.Repository.Interface
         public Task<Boolean> CancelCase(int RequestId, CancelCaseModel cancelCaseModel);
         public Task<List<CaseTagComboBox>> CaseTagComboBox();
         public Task<List<RegionComboBox>> RegionComboBox();
+        public IEnumerable<Region> GetRegions();
+        public List<Physician> GetPhysicianByRegion(int RegionId);
+        public Task<Boolean> SaveAssignCase(int RequestId, AssignCaseModel assignCaseModel);
+        public Task<Boolean> BlockCase(int RequestId, CancelCaseModel cancelCaseModel);
+
+
+
 
 
     }

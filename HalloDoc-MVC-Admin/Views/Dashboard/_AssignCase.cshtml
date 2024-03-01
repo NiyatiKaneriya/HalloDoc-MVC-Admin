@@ -13,34 +13,33 @@
                 <button type="button" class="btn-close btn-light" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" asp-controller="AdminDashboard" asp-action="">
-                    <input name="requestid" id="assignreqid" class="d-none" />
+                <form method="post" asp-controller="Dashboard" asp-action="SaveAssignCase" asp-route-RequestId="RequestId">
+
+                    <input asp-for="RequestId" name="RequestId" id="assignreqid" hidden />
                     <div class="mb-3">
                         To assign the request search and select the physician.
                     </div>
                     <div class="mb-3">
                         
                         
-                        <select class="form-select form-select-sm mt-3 p-2" required data-allow-clear="true" tabindex="-1" id="region2" asp-for="RegionId" asp-items="@(new SelectList(ViewBag.RegionComboBox,"RegionId","RegionName"))" data-control="select2" data-placeholder="Select Level">
+                        <select class="form-select form-select-sm mt-3 p-2" required data-allow-clear="true" tabindex="-1" onchange="myFunction()" id="region" asp-for="RegionId" asp-items="@(new SelectList(ViewBag.RegionComboBox,"RegionId","RegionName"))" data-control="select2" data-placeholder="Select Level">
                             <option>All Region</option>
                         </select>
 
                     </div>
                     <div class="mb-3">
-                        @* <select name="" class="py-2 mt-3 form-control mb-3 w-100 " id="">
-                            <option id="defaultphysician" value="" selected disabled hidden>Select Physician</option>
-                        </select> *@
-                        <select class="form-select form-select-sm mt-3 p-2" required data-allow-clear="true" tabindex="-1" id="Provider" asp-for="PhysicianId" asp-items="@(new SelectList(ViewBag.RegionComboBox,"RegionId","RegionName"))" data-control="select2" data-placeholder="Select Level">
+                       
+                        <select class="form-select form-select-sm mt-3 p-2" required data-allow-clear="true" tabindex="-1" id="Physician" asp-for="PhysicianId" asp-items="@(new SelectList(ViewBag.PhysiciansByRegion,"PhysicianId","PhysicianId"))" data-control="select2" data-placeholder="Select Level">
                             <option>Physician</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="message-text" class="col-form-label">Description</label>
-                        <textarea name="canceladditional" class="form-control" id="message-text" style="height: 100px"></textarea>
+                        <textarea asp-for="Notes" name="canceladditional" class="form-control" id="message-text" style="height: 100px"></textarea>
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-info text-light">Confirm</button>
+                        <input type="submit" class="btn btn-info text-light">
                         <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">Cancel</button>
                     </div>
                 </form>
@@ -50,3 +49,49 @@
         </div>
     </div>
 </div>
+
+
+
+    <script type="text/javascript">
+
+        function myFunction() {
+            var email = $("#region").val();
+            console.log(email+12);
+            $.ajax({
+                type: "POST",
+            url: '@Url.Action("GetPhysicianByRegion","Dashboard")?regionid=' + email,
+                cache: false,
+                success: function (response) {
+
+                    console.log(response);
+                    var s = '<option value="-1">Please Select</option>';
+                    for (var i = 0; i < response.length; i++) {
+                    s += '<option value="' + response[i].physicianId + '">' + response[i].firstName + '</option>';
+                    }
+                $("#Physician").html(s);
+                },
+                error: function () {
+                    alert("Error while checking email.");
+                }
+            });
+        }
+
+    const assignmodal = document.getElementById('assignmodal')
+    if (assignmodal) {
+        assignmodal.addEventListener('show.bs.modal', event => {
+            // Button that triggered the modal
+            const button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            
+            const requestid = button.getAttribute('data-bs-requestid')
+            // If necessary, you could initiate an Ajax request here
+            // and then do the updating in a callback.
+            // Update the modal's content.
+            
+            document.getElementById('assignreqid').value = requestid;
+            //modalTitle.textContent = `New message to ${recipient}`
+            
+        })
+    }
+
+    </script>

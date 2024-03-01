@@ -64,7 +64,7 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
                 statusList.Add(7);
                 statusList.Add(8);
             }
-            else if (state == 3)
+            else if (state == 2)
             {
                 statusList.Add(4);
                 statusList.Add(5);
@@ -73,7 +73,7 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
             {
                 statusList.Add(1);
             }
-            else if (state == 2)
+            else if (state == 3)
             {
                 statusList.Add(2);
             }
@@ -417,10 +417,82 @@ namespace HalloDoc_MVC_AdminRepositories.Repository
                 RegionAbbr = req.Abbreviation,
             }).ToListAsync();
         }
-        public IEnumerable<RegionModel> GetRegions()
+        public IEnumerable<Region> GetRegions()
         {
-            return _context.Regions.ToList();
+            return (IEnumerable<Region>)_context.Regions.ToList();
         }
+        public List<Physician> GetPhysicianByRegion(int RegionId)
+        {
+            List < Physician >  p= _context.Physicians.Where(p => p.RegionId == RegionId).ToList();
+            return p;
+        }
+        public async Task<Boolean> SaveAssignCase(int RequestId, AssignCaseModel assignCaseModel)
+        {
+            var req = await _context.Requests.Where(e => e.RequestId == assignCaseModel.RequestId).FirstAsync();
+            if (req != null)
+            {
+                
+                req.Status = 2;
+                req.PhysicianId = assignCaseModel.PhysicianId;
+                _context.Requests.Update(req);
+                _context.SaveChanges();
 
+                RequestStatusLog requestStatusLog = new RequestStatusLog
+                {
+                    RequestId = (int)assignCaseModel.RequestId,
+                    Status = 2,
+                    AdminId = 1,
+                    PhysicianId = assignCaseModel.PhysicianId,
+                    Notes = assignCaseModel?.Notes,
+                    CreatedDate = DateTime.Now,
+                };
+
+                _context.RequestStatusLogs.Add(requestStatusLog);
+                _context.SaveChanges();
+
+                return true;
+            }
+            return false;
+        }
+        public async Task<Boolean> BlockCase(int RequestId, CancelCaseModel cancelCaseModel)
+        {
+            var req = await _context.Requests.Where(e => e.RequestId == cancelCaseModel.Requestid).FirstAsync();
+            if (req != null)
+            {
+
+                req.Status = 11;
+                
+                _context.Requests.Update(req);
+                _context.SaveChanges();
+
+                RequestStatusLog requestStatusLog = new RequestStatusLog
+                {
+                    RequestId = (int)cancelCaseModel.Requestid,
+                    Status = 2,
+                    AdminId = 1,
+                    
+                    Notes = cancelCaseModel?.Notes,
+                    CreatedDate = DateTime.Now,
+                };
+
+                _context.RequestStatusLogs.Add(requestStatusLog);
+                _context.SaveChanges();
+
+                BlockRequest blockCase = new BlockRequest
+                {
+                    RequestId = cancelCaseModel.Requestid.ToString(),
+                    Reason = cancelCaseModel.Notes,
+                    CreatedDate = DateTime.Now,
+                    PhoneNumber = req?.PhoneNumber,
+                    Email = req?.Email,
+
+                };
+                _context.BlockRequests.Add(blockCase);
+                _context.SaveChanges();
+
+                return true;
+            }
+            return false;
+        }
     }
 }
